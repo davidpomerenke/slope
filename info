@@ -1,9 +1,0 @@
-1) The files "drag.js", "index.js", "sgVis.js" are only used in SG study
-
-2) The file "multi-brushes.js" is a slightly altered version that I found here (http://bl.ocks.org/bollwyvl/8463137) to visualized the datasets by PCP which allows multiple brushes. 
-
-3) The file "pcVis.js" is to find out how the data points are labeled and generate a corresponding CSV file. The CSV file was mainly meant for another methodology which we discussed at the beginning of the thesis. 
-
-4) The  file "formWizard.js" specifies how the pages should appear and which properties each page should have
-
-5) The file "config.js" stores the order of tasks for each participant.
