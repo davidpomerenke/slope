@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #f1f1f1;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+    user-select: none;
+}
+
+#regForm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    font-family: Raleway;
+    padding: 0px;
+    max-width: 1000px;
+    height: 100vh;
+    margin: 0px auto;
+}
+
+#nextBtn {
+    background-color: steelblue;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+    width: 123px;
+}
+
+#buttons {
+    position: fixed;
+    right: 30px; 
+    bottom: 20px; 
+}
+
+#nextBtn:hover {
+    opacity: 0.8;
+}
+
+#regForm div {
+    text-align: center;
+    font-size: 9pt;
+}
