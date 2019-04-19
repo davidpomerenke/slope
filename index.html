@@ -3,18 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Line Adjustment Techniques</title>
+    <title>
+        Line Adjustment
+    </title>
+    <link rel="stylesheet" href="libraries/jquery-ui.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="main()">
-    <div id="wrapper">
-    </div>
+    <header>
+        <section>
+            <h3>
+                Line Adjustment
+            </h3>
+            <p>
+                Explain here, ....
+            </p>
+        </section>
+        <section id="sliders">
+            <section class="slidewrapper">
+                <span>
+                    Height
+                </span>
+                <div id="slider-height"></div>
+            </section>
+            <section class="slidewrapper">
+                <span>
+                    Space
+                </span>
+                <div id="slider-space"></div>
+            </section>
+            <section class="slidewrapper">
+                <span>
+                    Thickness
+                </span>
+                <div id="slider-thickness"></div>
+            </section>
+        </section>
+    </header>
+    <main id="main"></main>
 </body>
-
+<!-- libraries-->
 <script src="libraries/d3.v3.min.js"></script>
-<script src="libraries/jquery-3.3.1.slim.min.js"></script>
-
+<script src="libraries/jquery-3.4.0.min.js"></script>
+<script src="libraries/jquery-ui.min.js"></script>
+<!-- scripts -->
 <script src="visualization.js"></script>
 <script src="main.js"></script>
-
 </html>
