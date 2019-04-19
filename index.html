@@ -8,34 +8,35 @@
     </title>
     <link rel="stylesheet" href="libraries/jquery-ui.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="visualization.css">
 </head>
 <body onload="main()">
     <header>
         <section>
-            <h3>
+            <h3 id="testy">
                 Line Adjustment
             </h3>
             <p>
-                Explain here, ....
+                Todo: Speed Up Line Thickness Adjustment <br> by avoiding unnecessary calculations. 
             </p>
         </section>
         <section id="sliders">
             <section class="slidewrapper">
-                <span>
+                <label for="slider-height">
                     Height
-                </span>
+                </label>
                 <div id="slider-height"></div>
             </section>
             <section class="slidewrapper">
-                <span>
+                <label for="slider-space">
                     Space
-                </span>
+                </label>
                 <div id="slider-space"></div>
             </section>
             <section class="slidewrapper">
-                <span>
+                <label for="slider-thickness">
                     Thickness
-                </span>
+                </label>
                 <div id="slider-thickness"></div>
             </section>
         </section>

@@ -51,13 +51,14 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
         axis = d3.svg.axis().orient("left"),
         foreground;
 
-    var svg = d3.select(pcTarget).append("svg:svg")
-        .attr("width", 850 * scale_factor)
-        .attr("height", (h + m[0] + m[2]) * scale_factor)
-        .append("svg:g")
-        .attr("transform", "translate(" + (-50 * scale_factor) + "," + (m[0] * scale_factor) + "), scale(" + scale_factor + ")")
-        .attr("draggable", "false")
-        .attr("viewBox", "0 0 850" + h + m[0] + m[2])
+    var svg = d3.select(pcTarget)
+        .append("svg:svg")
+            .attr("width", 850 * scale_factor)
+            .attr("height", (h + m[0] + m[2]) * scale_factor)
+            .append("svg:g")
+                .attr("transform", "translate(" + (-50 * scale_factor) + "," + (m[0] * scale_factor) + "), scale(" + scale_factor + ")")
+                .attr("draggable", "false")
+                .attr("viewBox", "0 0 850" + h + m[0] + m[2])
 
     d3.csv(file, function (data) {
         

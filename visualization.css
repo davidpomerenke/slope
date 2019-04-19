@@ -1,0 +1,26 @@
+.axis line, .axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: geometricPrecision;
+}
+
+.axis text {
+    text-shadow: 0 1px 0 #fff;
+}
+
+svg {
+    display: block;
+    font: 10px sans-serif;
+    margin: 0px;
+}
+
+.tick{
+    display: none;
+}
+
+.foreground path {
+    fill: none;
+    stroke: #466db4;
+    stroke-opacity: 1;
+    shape-rendering: geometricPrecision;
+}
