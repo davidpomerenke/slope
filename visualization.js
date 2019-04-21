@@ -78,7 +78,7 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
 
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(data[0]).filter(function (d) {
-            return d !== "ObjectID" && (y[d] = d3.scale.linear()
+            return d !== "ObjectID" && d !== "id" && (y[d] = d3.scale.linear()
                 .domain([0, 1])
                 .range([h, 0]));
         }));

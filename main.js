@@ -170,7 +170,7 @@ function main() {
 
     var i = 1; 
 
-    for (file of files.slice(-2)) {
+    for (file of files) {
 
         var row = document.createElement("div")
         row.setAttribute("class", "row");
