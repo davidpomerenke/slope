@@ -4,22 +4,24 @@ var space       = 1;
 
 var files = [];
 
-function update(parameter, value) {
+function update(parameter, value, id="") {
+
+    var isNew = (id !== "" && (id = " "+id+" ")) ? true : false;
 
     if (parameter === "height") {
 
-        $("svg, g").each(function(){
+        $(id+"svg, "+id+"g").each(function(){
 
             if (typeof $(this).attr("height") !== typeof undefined) {
 
                 $(this).attr("height", function(i, px){
-                
-                    return px * value / height;
+
+                    return px * value / (isNew ? 1 : height);
                 });
             }
         });
 
-        $("g.box").each(function(){
+        $(id+"g.box").each(function(){
 
             if (typeof $(this).attr("transform") !== typeof undefined) {
                 
@@ -30,20 +32,20 @@ function update(parameter, value) {
                         return (
                             m.replace(/,.*$/, ",")
                             + 
-                            value / space * parseFloat(m.replace(/(^.*,|\))/g, "")) + ")");
+                            value * parseFloat(m.replace(/(^.*,|\))/g, "")) / (isNew ? 1 : space) + ")");
                     });
                 });
             }
         });
 
-        $("path").attr("d", function(i, px){
+        $(id+"path").attr("d", function(i, px){
 
             return px.replace(/(M|L)?(\d|\.)*(,|V)(\d|\.)+/gi, function(m) { 
 
                 return (
                     m.replace(/(V|,).*$/, "$1")
                     +
-                    value / height * parseFloat(m.replace(/^.*(,|V)/, ""))
+                    value / (isNew ? 1 : height) * parseFloat(m.replace(/^.*(,|V)/, ""))
                 ); 
             });
         });
@@ -52,33 +54,33 @@ function update(parameter, value) {
     }
     else if (parameter === "space") {
 
-        $("svg, g").each(function(){
+        $(id+"svg, "+id+"g").each(function(){
 
             if (typeof $(this).attr("width") !== typeof undefined) {
 
                 $(this).attr("width", function(i, px){
                 
-                    return px * value / space;
+                    return px * value / (isNew ? 1 : space);
                 });
             }
         });
 
-        $("g.dimension").attr("transform", function(i, px){
+        $(id+"g.dimension").attr("transform", function(i, px){
                 
             return px.replace(/translate\(.*\)/, function(m){
 
-                return ("translate(" + (value / space * parseFloat(m.replace(/[^0-9\.]/g, ""))) + ")")
+                return ("translate(" + (value * parseFloat(m.replace(/[^0-9\.]/g, ""))) / (isNew ? 1 : space) + ")")
             });
         });
 
-        $("path").attr("d", function(i, px){
+        $(id+"path").attr("d", function(i, px){
 
             return px.replace(/[LMH](\d|\.)+/gi, function(m) {
 
                 return (
                     m.replace(/[^LMH]/gi, "")
                     +
-                    value / space * parseFloat(m.replace(/[LMH]/gi, ""))
+                    value * parseFloat(m.replace(/[LMH]/gi, "")) / (isNew ? 1 :space)
                 ); 
             });
         });
@@ -87,18 +89,19 @@ function update(parameter, value) {
     }
     else if (parameter === "thickness") {
 
-        $("path").each(function(){
+        $(id+"path").each(function(){
 
             $(this).attr("stroke-width", value * parseFloat($(this).attr("data-stroke-width")) + "");
         });
     }
     else if (parameter === "opacity") {
 
-        $("path").css("opacity", value + "");
+        $(id+"path").css("opacity", value + "");
     }
     else if (parameter === "colour") {
 
-        $(".foreground path").css("stroke", $("#select-colour").val());
+        $(id+"g.foreground path").css("stroke", $("#select-colour").val());
+
     }
 }
 
@@ -111,26 +114,30 @@ function toggleVis(vis) {
     else{
 
         var s = vis.split("-");
-        console.log(s);
+
         var file = "data/synthetic/FinalVersion/Original/" + s[0] + "N/DefaultOrdering/" + s[1] + "C." + 1 + ".csv"
     }
 
     var i = files.indexOf(file);
 
-    if ($("#pcTarget"+i+"a").html() === "") {
+    ["a", "b"].forEach(s => {
 
-        pcVis(file, "#pcTarget"+i+"a", "emphasize dis", 0.5);
-        pcVis(file, "#pcTarget"+i+"b", "neutral", 0.5);
-    }
-    else {
+        if ($("#pcTarget"+i+s).html() === "") {
 
-        $("#pcTarget"+i+"a").html("");
-        $("#pcTarget"+i+"b").html("");
-    }
+            pcVis(file, "#pcTarget"+i+s, (s === "a" ? "emphasize dis" : "neutral"), 0.5);
+        }
+        else {
+    
+            $("#pcTarget"+i+s).html("");
+        }
+
+    });
 }
 
 function main() {
     
+    $("input:checkbox").removeAttr("checked").prop("checked", false);
+
     // jQuery UI slider function
     ["height", "space"].forEach(function(parameter){
 

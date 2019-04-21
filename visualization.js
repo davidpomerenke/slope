@@ -81,6 +81,8 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
 
     d3.csv(file, function (data) {
         
+        $(pcTarget).css("display", "none");
+        
         y_scale = d3.scale.linear()
                 .domain([0, 1])
                 .range([h, 0]);
@@ -130,11 +132,14 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
         }
         
         foreground = [];
+
         for (k = 0; k < (dimensions.length - 1); k++) {
+
             // Add blue foreground lines
             foreground[k] = svg.append("svg:g")
                 .attr("class", "foreground")
                 .attr("id", "fground"+k);
+
             if (lineMethod != "neutral polygon") {
                 foreground[k].selectAll("path")
                     .data(data).enter()
@@ -168,10 +173,20 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
             .each(function (d) {
                 d3.select(this).call(axis.scale(y[d]));
             });
+
+        // Update properties from sliders. 
+        update("height",    Math.pow($("#slider-height")   .slider("value"), 2),    pcTarget);
+        update("space",     Math.pow($("#slider-space")    .slider("value"), 2),    pcTarget);
+        update("thickness", Math.pow($("#slider-thickness").slider("value"), 3),    pcTarget);
+        update("opacity",            $("#slider-opacity")  .slider("value"),        pcTarget);
+        update("colour",             $("#select-colour option:selected").val(),     pcTarget);
+
+        $(pcTarget).css("display", "unset");
     });
 
     function position(d) {
         var v = dragging[d];
         return v == null ? x(d) : v;
     }
+
 }
