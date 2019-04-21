@@ -13,9 +13,72 @@
 <body onload="main()">
     <header>
         <section>
-            <h3 id="testy">
+            <h3>
                 Line Adjustment
             </h3>
+            <h4>Synthetic Data</h4>
+            <section class="checkboxgroup">
+                <section>
+                    <input type="checkbox" onchange="toggleVis('150-2')" id="150-2">
+                    <label for="150-2">
+                        N150, 2C
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('150-4')" id="150-4">
+                    <label for="150-4">
+                        N150, 4C
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('300-2')" id="300-2">
+                    <label for="300-2">
+                        N300, 2C
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('300-4')" id="300-4">
+                    <label for="300-4">
+                        N300, 4C
+                    </label>
+                </section>
+            </section>
+            <h4>Realworld Data</h4>
+            <section class="checkboxgroup">
+                <section>
+                    <input type="checkbox" onchange="toggleVis('RW09-seeds-normalized.csv')" id="RW09-seeds-normalized.csv">
+                    <label for="RW09-seeds-normalized.csv">
+                        Seeds
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('RW01-airquality-normalized.csv')" id="RW01-airquality-normalized.csv">
+                    <label for="RW01-airquality-normalized.csv">
+                        Air Quality
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('RW04-forestfires-normalized.csv')" id="RW04-forestfires-normalized.csv">
+                    <label for="RW04-forestfires-normalized.csv">
+                        Forest Fires
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('RW07-wine-normalized.csv')" id="RW07-wine-normalized.csv">
+                    <label for="RW07-wine-normalized.csv">
+                        Wine
+                    </label>
+                </section>
+            </section>
+            <label for="select-colour">
+                    Colour
+            </label>
+            <select id="select-colour" onchange="update('colour')">
+                <option value="#466db4">blue </option>
+                <option value="black">  black</option>
+                <option value="red">    red  </option>
+                <option value="green">  green</option>
+            </select>
         </section>
         <section id="sliders">
             <section class="slidewrapper">

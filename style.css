@@ -19,7 +19,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
     width: 880px;
-    height: 170px; 
+    height: 180px; 
     margin-top: 10px;
     padding: 10px;
     background-color: #fff;
@@ -29,6 +29,19 @@ header {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+header h3, header section section {
+    padding-bottom: 5px;
+}
+
+section.checkboxgroup {
+    display: flex;
+    justify-content: space-between;
+}
+
+section.checkboxgroup section {
+    padding-right: 5px;
 }
 
 header #sliders {
@@ -51,7 +64,7 @@ header .slidewrapper {
 }
 
 main {
-    padding-top: 190px;
+    padding-top: 200px;
     padding-bottom: 20px;
 }
 
