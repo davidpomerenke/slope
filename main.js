@@ -1,8 +1,6 @@
 // slider parameters
 var height      = 1;
 var space       = 1;
-var thickness   = 1;
-var opacity     = 1;
 
 var files = [];
 
@@ -17,6 +15,23 @@ function update(parameter, value) {
                 $(this).attr("height", function(i, px){
                 
                     return px * value / height;
+                });
+            }
+        });
+
+        $("g.box").each(function(){
+
+            if (typeof $(this).attr("transform") !== typeof undefined) {
+                
+                $(this).attr("transform", function(i, px){
+                
+                    return px.replace(/translate\([0-9\.-]+,[0-9\.-]+\)/g, function(m) {
+
+                        return (
+                            m.replace(/,.*$/, ",")
+                            + 
+                            value / space * parseFloat(m.replace(/(^.*,|\))/g, "")) + ")");
+                    });
                 });
             }
         });
@@ -74,22 +89,15 @@ function update(parameter, value) {
 
     if (parameter === "thickness") {
 
-        $("path").attr("stroke-width", function(i, px){
+        $("path").each(function(){
 
-            return (value / thickness * parseFloat(px)) + "";
+            $(this).attr("stroke-width", value * parseFloat($(this).attr("data-stroke-width")) + "");
         });
-
-        thickness = value;
     }
 
     if (parameter === "opacity") {
 
-        $("path").css("opacity", function(i, pc){
-
-            return (value / opacity * parseFloat(pc)) + "";
-        });
-
-        opacity = value;
+        $("path").css("opacity", value + "");
     }
 }
 
@@ -123,13 +131,13 @@ function main() {
             value: 1, 
         value: 1, 
         stop: function(event, ui) {
-            update("opacity", ui.value * ui.value);
+            update("thickness", ui.value * ui.value * ui.value);
         }
     }); 
 
     $("#slider-opacity").slider({
         step: 0.05,
-        min: 0.1,
+        min: 0,
         max: 1,
         value: 1, 
         stop: function(event, ui) {

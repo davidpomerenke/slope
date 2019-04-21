@@ -68,6 +68,7 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
                 .attr("transform", "translate(" + (-50 * scale_factor) + "," + (m[0] * scale_factor) + "), scale(" + scale_factor + ")")
                 .attr("draggable", "false")
                 .attr("viewBox", "0 0 850" + h + m[0] + m[2])
+                .attr("class", "box");
 
     d3.csv(file, function (data) {
         
