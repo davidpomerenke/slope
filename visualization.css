@@ -24,3 +24,10 @@ svg {
     stroke-opacity: 1;
     shape-rendering: geometricPrecision;
 }
+
+.foreground polygon {
+    fill: #466db4;
+    stroke: none;
+    shape-rendering: geometricPrecision;
+    opacity: 1;
+}

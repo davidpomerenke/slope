@@ -2,6 +2,7 @@
 var height      = 1;
 var space       = 1;
 var thickness   = 1;
+var opacity     = 1;
 
 var files = [];
 
@@ -80,23 +81,61 @@ function update(parameter, value) {
 
         thickness = value;
     }
+
+    if (parameter === "opacity") {
+
+        $("path").css("opacity", function(i, pc){
+
+            return (value / opacity * parseFloat(pc)) + "";
+        });
+
+        opacity = value;
+    }
 }
 
 function main() {
     
     // jQuery UI slider function
-    ["height", "space", "thickness"].forEach(function(parameter){
+    ["height", "space"].forEach(function(parameter){
 
         $("#slider-" + parameter).slider({
-            step: 0.1,
-            min: 0.5,
-            max: 2,
+            step: 0.05,
+            min: 0.6,
+            max: 1.4,
             value: 1, 
             stop: function(event, ui) {
-                update(parameter, ui.value)
-              }
+                update(parameter, ui.value * ui.value);
+            }
         }); 
     });
+
+    $("#slider-thickness").slider({
+        step: 0.1,
+        min: 0.1,
+        max: 1.95,
+        value: 1, 
+            value: 1, 
+        value: 1, 
+            value: 1, 
+        value: 1, 
+            value: 1, 
+        value: 1, 
+            value: 1, 
+        value: 1, 
+        stop: function(event, ui) {
+            update("opacity", ui.value * ui.value);
+        }
+    }); 
+
+    $("#slider-opacity").slider({
+        step: 0.05,
+        min: 0.1,
+        max: 1,
+        value: 1, 
+        stop: function(event, ui) {
+            update("opacity", ui.value);
+        }
+    }); 
 
     for (noise=150; noise<=300; noise+=150) {
 
@@ -123,7 +162,7 @@ function main() {
 
     var i = 1; 
 
-    for (file of files.slice(-12)) {
+    for (file of files.slice(-2)) {
 
         var row = document.createElement("div")
         row.setAttribute("class", "row");

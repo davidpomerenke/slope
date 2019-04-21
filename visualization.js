@@ -5,18 +5,21 @@ function lineWidth // for a couple of points on two neighbouring axes
     widthDifference // between the points = between the axes
 ) {
 
-    alpha = Math.abs(Math.atan(heightDifference / widthDifference));
-
     if (lineMethod === "emphasize dis") {
         return 1;
     }
 
     else if (lineMethod === "neutral") {
+
+        alpha = Math.abs(Math.atan(heightDifference / widthDifference));
+        
         return Math.abs(Math.cos(alpha));
     }
 
-    else { // esoteric techniques, unused here
-
+    else { // experimental techniques, unused here
+    
+        alpha = Math.abs(Math.atan(heightDifference / widthDifference));
+        
         maxHeightDifference = Math.abs(y_scale(1) - y_scale(0));
         
         alpha_max = Math.abs(Math.atan(maxHeightDifference / widthDifference));
@@ -37,6 +40,12 @@ function lineWidth // for a couple of points on two neighbouring axes
     }
 }
 
+/* lineMethod
+ - emphasize dis:                normal lines
+ - neutral:                      adjust line width with math
+ - neutral polygon:              adjust line width with polygon; poorer anti-aliasing
+ - neutral bold  (experimental): neutral; line width corresponds to boldest possible line in emphasize dis
+ - emphasize sim (experimental): revert emphasize dis effect; useless */
 function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
 
     var m = [30, 10, 10, 10],
@@ -73,6 +82,7 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
                 .range([h, 0]));
         }));
         
+        // Returns the path for a given data point.
         // cf. https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example
         function createPathFunction(k) {
             return function(d) {
@@ -93,26 +103,44 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
                 return lineWidth(lineMethod, heightDifference, widthDifference);
             }
         }
-            
-        path = [];
-        width = []
-        for (k = 0; k < (dimensions.length - 1); k++) {
-            // Returns the path for a given data point.
-            path[k] = createPathFunction(k);
-            width[k] = createWidthFunction(k);
-        }
 
-        // Add blue foreground lines
+        function createPolygonFunction(k) {
+            return function(d) {
+                points = [dimensions[k],dimensions[k+1]].map(function (p) {
+                    return [position(p), y_scale(d[p])];
+                });
+                heightDifference = Math.abs(points[1][1] - points[0][1]);
+                widthDifference = Math.abs(points[1][0] - points[0][0]);
+                return ""
+                    + points[0][0] + "," +  points[0][1]      + " "
+                    + points[0][0] + "," + (points[0][1] + 1) + " "
+                    + points[1][0] + "," + (points[1][1] + 1) + " "
+                    + points[1][0] + "," +  points[1][1]      + " "
+            }
+        }
+        
         foreground = [];
-        for (j = 0; j < (dimensions.length - 1); j++) {
-            foreground[j] = svg.append("svg:g")
+        for (k = 0; k < (dimensions.length - 1); k++) {
+            // Add blue foreground lines
+            foreground[k] = svg.append("svg:g")
                 .attr("class", "foreground")
-                .attr("id", "fground"+j)
-                .selectAll("path")
-                .data(data)
-                .enter().append("svg:path")
-                .attr("d", path[j])
-                .attr("stroke-width", width[j]);
+                .attr("id", "fground"+k);
+            if (lineMethod != "neutral polygon") {
+                foreground[k].selectAll("path")
+                    .data(data).enter()
+                        .append("svg:path")
+                            .attr("d", createPathFunction(k))
+                            .attr("stroke-width", createWidthFunction(k))
+                            .attr("data-stroke-width", createWidthFunction(k));
+            }
+            else if (lineMethod === "neutral polygon") {
+                // alternative rendering with polygon and without math
+                // unfortunately, anti-aliasing is poorer than the above method
+                foreground[k].selectAll("path")
+                    .data(data).enter()
+                        .append("svg:polygon")
+                            .attr("points", createPolygonFunction(k))
+            }
         }
 
         // Add a group element for each dimension.
