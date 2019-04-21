@@ -11,9 +11,18 @@ function lineWidth // for a couple of points on two neighbouring axes
 
     else if (lineMethod === "neutral") {
 
-        alpha = Math.abs(Math.atan(heightDifference / widthDifference));
-        
-        return Math.abs(Math.cos(alpha));
+        var method = 1; 
+
+        if (method === 1) {
+
+            return 1 / Math.sqrt(heightDifference / widthDifference + 1);
+        }
+        else {
+
+            alpha = Math.abs(Math.atan(heightDifference / widthDifference));
+            
+            return Math.abs(Math.cos(alpha));
+        }
     }
 
     else { // experimental techniques, unused here
