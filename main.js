@@ -107,11 +107,15 @@ function update(parameter, value, id="") {
 
 function toggleVis(vis) {
     
-    if (vis.substring(0,2) === "RW") {
+    if (vis.substring(0,2) === "RW") { // realworld data path
 
         var file = "data/realworld datasets/FinalVersion/" + vis;
     }
-    else{
+    else if (vis.substring(0,5) === "Noise") { // noise data path
+        
+        var file = "data/noise/" + vis;
+    }
+    else{ // synthetic data path
 
         var s = vis.split("-");
 
@@ -179,6 +183,11 @@ function main() {
             update("opacity", ui.value);
         }
     }); 
+
+    for (i=250; i<=400; i+=50) {
+        
+        files.push("data/noise/Noise_"+i+".csv");
+    }
 
     for (noise=0; noise<=300; noise+=150) {
 

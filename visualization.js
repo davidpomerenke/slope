@@ -57,7 +57,7 @@ function lineWidth // for a couple of points on two neighbouring axes
  - emphasize sim (experimental): revert emphasize dis effect; useless */
 function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
 
-    var m = [30, 10, 10, 10],
+    var m = [10, 10, 10, 10],
         w = 960 - m[1] - m[3],
         h = 500 - m[0] - m[2];
 
@@ -89,7 +89,7 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
 
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(data[0]).filter(function (d) {
-            return d !== "ObjectID" && d !== "id" && (y[d] = d3.scale.linear()
+            return d !== "ObjectID" && d !== "id" && d !== "ObjectId" && (y[d] = d3.scale.linear()
                 .domain([0, 1])
                 .range([h, 0]));
         }));
