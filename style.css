@@ -19,7 +19,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
     width: 880px;
-    height: 200px; 
+    height: 220px; 
     margin-top: 10px;
     padding: 10px;
     background-color: #fff;
@@ -52,7 +52,7 @@ header .slidewrapper {
     padding: 10px;
 }
 
-.ui-slider {
+.ui-slider, #select-colour {
     width: 200px;
     float: right;
     margin-left: 20px;
@@ -64,7 +64,7 @@ header .slidewrapper {
 }
 
 main {
-    padding-top: 220px;
+    padding-top: 240px;
     padding-bottom: 20px;
 }
 

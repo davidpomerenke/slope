@@ -105,23 +105,8 @@ function update(parameter, value, id="") {
     }
 }
 
-function toggleVis(vis) {
+function toggleVis(file) {
     
-    if (vis.substring(0,2) === "RW") { // realworld data path
-
-        var file = "data/realworld datasets/FinalVersion/" + vis;
-    }
-    else if (vis.substring(0,5) === "Noise") { // noise data path
-        
-        var file = "data/noise/" + vis;
-    }
-    else{ // synthetic data path
-
-        var s = vis.split("-");
-
-        var file = "data/synthetic/FinalVersion/Original/" + s[0] + "N/DefaultOrdering/" + s[1] + "C." + 1 + ".csv"
-    }
-
     var i = files.indexOf(file);
 
     ["a", "b"].forEach(s => {
@@ -184,9 +169,14 @@ function main() {
         }
     }); 
 
+    for (i of [150, 200, 300, 400]) {
+        
+        files.push("data/noise/RandomNoise/datasets/Noise_"+i+".csv");
+    }
+
     for (i=250; i<=400; i+=50) {
         
-        files.push("data/noise/Noise_"+i+".csv");
+        files.push("data/noise/70%Linear_NoiseOnly/datasets/Noise_"+i+".csv");
     }
 
     for (noise=0; noise<=300; noise+=150) {

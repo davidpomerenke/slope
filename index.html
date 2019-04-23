@@ -13,28 +13,55 @@
 <body onload="main()">
     <header>
         <section>
-            <h4>Linear Noise</h4>
+            <h4>Random Noise</h4>
             <section class="checkboxgroup">
                 <section>
-                    <input type="checkbox" onchange="toggleVis('Noise_250.csv')" id="N250">
-                    <label for="N250">
-                        N250
+                    <input type="checkbox" onchange="toggleVis('data/noise/RandomNoise/datasets/Noise_150.csv')" id="N150">
+                    <label for="N150">
+                        N150
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('Noise_300.csv')" id="N300">
+                    <input type="checkbox" onchange="toggleVis('data/noise/RandomNoise/datasets/Noise_200.csv')" id="N200">
+                    <label for="N200">
+                        N200
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('data/noise/RandomNoise/datasets/Noise_300.csv')" id="N300">
                     <label for="N300">
                         N300
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('Noise_350.csv')" id="N350">
+                    <input type="checkbox" onchange="toggleVis('data/noise/RandomNoise/datasets/Noise_400.csv')" id="N400">
+                    <label for="N400">
+                        N400
+                    </label>
+                </section>
+            </section>
+            <h4>Linear Noise</h4>
+            <section class="checkboxgroup">
+                <section>
+                    <input type="checkbox" onchange="toggleVis('data/noise/70%Linear_NoiseOnly/datasets/Noise_250.csv')" id="N250">
+                    <label for="N250">
+                        N250
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('data/noise/70%Linear_NoiseOnly/datasets/Noise_300.csv')" id="N300">
+                    <label for="N300">
+                        N300
+                    </label>
+                </section>
+                <section>
+                    <input type="checkbox" onchange="toggleVis('data/noise/70%Linear_NoiseOnly/datasets/Noise_350.csv')" id="N350">
                     <label for="N350">
                         N350
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('Noise_400.csv')" id="N400">
+                    <input type="checkbox" onchange="toggleVis('data/noise/70%Linear_NoiseOnly/datasets/Noise_400.csv')" id="N400">
                     <label for="N400">
                         N400
                     </label>
@@ -43,25 +70,25 @@
             <h4>Synthetic Data</h4>
             <section class="checkboxgroup">
                 <section>
-                    <input type="checkbox" onchange="toggleVis('150-2')" id="150-2">
+                    <input type="checkbox" onchange="toggleVis('data/synthetic/FinalVersion/Original/150N/DefaultOrdering/2C.1.csv')" id="150-2">
                     <label for="150-2">
                         N150, 2C
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('150-4')" id="150-4">
+                    <input type="checkbox" onchange="toggleVis('data/synthetic/FinalVersion/Original/150N/DefaultOrdering/4C.1.csv')" id="150-4">
                     <label for="150-4">
                         N150, 4C
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('300-2')" id="300-2">
+                    <input type="checkbox" onchange="toggleVis('data/synthetic/FinalVersion/Original/300N/DefaultOrdering/2C.1.csv')" id="300-2">
                     <label for="300-2">
                         N300, 2C
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('300-4')" id="300-4">
+                    <input type="checkbox" onchange="toggleVis('data/synthetic/FinalVersion/Original/300N/DefaultOrdering/4C.1.csv')" id="300-4">
                     <label for="300-4">
                         N300, 4C
                     </label>
@@ -70,39 +97,30 @@
             <h4>Realworld Data</h4>
             <section class="checkboxgroup">
                 <section>
-                    <input type="checkbox" onchange="toggleVis('RW09-seeds-normalized.csv')" id="RW09-seeds-normalized.csv">
+                    <input type="checkbox" onchange="toggleVis('data/realworld datasets/FinalVersion/RW09-seeds-normalized.csv')" id="RW09-seeds-normalized.csv">
                     <label for="RW09-seeds-normalized.csv">
                         Seeds
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('RW01-airquality-normalized.csv')" id="RW01-airquality-normalized.csv">
+                    <input type="checkbox" onchange="toggleVis('data/realworld datasets/FinalVersion/RW01-airquality-normalized.csv')" id="RW01-airquality-normalized.csv">
                     <label for="RW01-airquality-normalized.csv">
                         Air Quality
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('RW04-forestfires-normalized.csv')" id="RW04-forestfires-normalized.csv">
+                    <input type="checkbox" onchange="toggleVis('data/realworld datasets/FinalVersion/RW04-forestfires-normalized.csv')" id="RW04-forestfires-normalized.csv">
                     <label for="RW04-forestfires-normalized.csv">
                         Forest Fires
                     </label>
                 </section>
                 <section>
-                    <input type="checkbox" onchange="toggleVis('RW07-wine-normalized.csv')" id="RW07-wine-normalized.csv">
+                    <input type="checkbox" onchange="toggleVis('data/realworld datasets/FinalVersion/RW07-wine-normalized.csv')" id="RW07-wine-normalized.csv">
                     <label for="RW07-wine-normalized.csv">
                         Wine
                     </label>
                 </section>
             </section>
-            <label for="select-colour">
-                Colour
-            </label>
-            <select id="select-colour" onchange="update('colour')">
-                <option value="#466db4" selected>blue </option>
-                <option value="black">           black</option>
-                <option value="red">             red  </option>
-                <option value="green">           green</option>
-            </select>
         </section>
         <section id="sliders">
             <section class="slidewrapper">
@@ -128,6 +146,17 @@
                     Opacity
                 </label>
                 <div id="slider-opacity"></div>
+            </section>
+            <section class="slidewrapper">
+                <label for="select-colour">
+                    Colour
+                </label>
+                <select id="select-colour" onchange="update('colour')">
+                    <option value="#466db4" selected>blue </option>
+                    <option value="black">           black</option>
+                    <option value="red">             red  </option>
+                    <option value="green">           green</option>
+                </select>
             </section>
         </section>
     </header>
