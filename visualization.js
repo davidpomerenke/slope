@@ -1,3 +1,5 @@
+var power = 1.0;
+
 function lineWidth // for a couple of points on two neighbouring axes
 (
     lineMethod, 
@@ -11,17 +13,22 @@ function lineWidth // for a couple of points on two neighbouring axes
 
     else if (lineMethod === "neutral") {
 
-        var method = 1; 
+        var method = 4;
 
         if (method === 1) {
-
             return 1 / Math.sqrt(heightDifference / widthDifference + 1);
         }
-        else {
+       
+		var alpha = Math.abs(Math.atan(heightDifference / widthDifference));
 
-            alpha = Math.abs(Math.atan(heightDifference / widthDifference));
-            
-            return Math.abs(Math.cos(alpha));
+        if (method === 2) {
+			return Math.cos(alpha);
+		}
+		if (method === 3) {
+			return Math.max(Math.cos(alpha * alpha), 0.2);
+		}
+		if (method === 4) {
+			return Math.pow(Math.cos(alpha), power);
         }
     }
 

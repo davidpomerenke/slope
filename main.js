@@ -4,6 +4,8 @@ var space       = 1;
 
 var files = [];
 
+var activeFiles = new Set();
+
 function update(parameter, value, id="") {
 
     var isNew = (id !== "" && (id = " "+id+" ")) ? true : false;
@@ -102,11 +104,24 @@ function update(parameter, value, id="") {
 
         $(id+"g.foreground path").css("stroke", $("#select-colour").val());
 
+    } else if (parameter === "power") {
+        console.log("P: " + value);
+        power = value;
+        // Toggle off and on for an update
+        var copy = Array.from(activeFiles);
+        copy.forEach(e => { toggleVis(e); toggleVis(e) } )
+
     }
 }
 
 function toggleVis(file) {
-    
+
+    if (activeFiles.has(file)) {
+        activeFiles.delete(file)
+    } else {
+        activeFiles.add(file);
+    }
+
     var i = files.indexOf(file);
 
     ["a", "b"].forEach(s => {
@@ -167,7 +182,17 @@ function main() {
         stop: function(event, ui) {
             update("opacity", ui.value);
         }
-    }); 
+    });
+
+    $("#slider-power").slider({
+        step: 0.05,
+        min: 0.05,
+        max: 5,
+        value: 1,
+        stop: function(event, ui) {
+            update("power", ui.value);
+        }
+    });
 
     for (i of [150, 200, 300, 400]) {
         
