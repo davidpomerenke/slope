@@ -1,3 +1,5 @@
+var power = 1.0;
+
 function lineWidth // for a couple of points on two neighbouring axes
 (
     lineMethod, 
@@ -11,17 +13,22 @@ function lineWidth // for a couple of points on two neighbouring axes
 
     else if (lineMethod === "neutral") {
 
-        var method = 1; 
+        var method = 4;
 
         if (method === 1) {
-
             return 1 / Math.sqrt(heightDifference / widthDifference + 1);
         }
-        else {
+       
+		var alpha = Math.abs(Math.atan(heightDifference / widthDifference));
 
-            alpha = Math.abs(Math.atan(heightDifference / widthDifference));
-            
-            return Math.abs(Math.cos(alpha));
+        if (method === 2) {
+			return Math.cos(alpha);
+		}
+		if (method === 3) {
+			return Math.max(Math.cos(alpha * alpha), 0.2);
+		}
+		if (method === 4) {
+			return Math.pow(Math.cos(alpha), power);
         }
     }
 
@@ -171,8 +178,10 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
         g.append("svg:g")
             .attr("class", "axis")
             .each(function (d) {
-                d3.select(this).call(axis.scale(y[d]));
+                d3.select(this).call(axis.scale(y[d]).ticks(0));
             });
+        $(".domain").attr("stroke", "black");
+        $(".domain").attr("fill", "none");
 
         // Update properties from sliders. 
         update("height",    Math.pow($("#slider-height")   .slider("value"), 2),    pcTarget);
