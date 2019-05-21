@@ -14,8 +14,8 @@ svg {
     margin: 0px;
 }
 
-.tick{
-    display: none;
+.domain {
+    stroke-width: 1px;
 }
 
 .foreground path {

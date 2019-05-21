@@ -178,8 +178,10 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
         g.append("svg:g")
             .attr("class", "axis")
             .each(function (d) {
-                d3.select(this).call(axis.scale(y[d]));
+                d3.select(this).call(axis.scale(y[d]).ticks(0));
             });
+        $(".domain").attr("stroke", "black");
+        $(".domain").attr("fill", "none");
 
         // Update properties from sliders. 
         update("height",    Math.pow($("#slider-height")   .slider("value"), 2),    pcTarget);

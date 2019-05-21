@@ -92,8 +92,11 @@ function update(parameter, value, id="") {
     else if (parameter === "thickness") {
 
         $(id+"path").each(function(){
+             
+            if (typeof $(this).attr("stroke-width") !== typeof undefined) {
 
-            $(this).attr("stroke-width", value * parseFloat($(this).attr("data-stroke-width")) + "");
+                $(this).attr("stroke-width", value * parseFloat($(this).attr("data-stroke-width")) + "");
+            }
         });
     }
     else if (parameter === "opacity") {
@@ -159,15 +162,7 @@ function main() {
     $("#slider-thickness").slider({
         step: 0.1,
         min: 0.1,
-        max: 1.95,
-        value: 1, 
-            value: 1, 
-        value: 1, 
-            value: 1, 
-        value: 1, 
-            value: 1, 
-        value: 1, 
-            value: 1, 
+        max: 5,
         value: 1, 
         stop: function(event, ui) {
             update("thickness", ui.value * ui.value * ui.value);
@@ -175,12 +170,12 @@ function main() {
     }); 
 
     $("#slider-opacity").slider({
-        step: 0.05,
+        step: 0.01,
         min: 0,
         max: 1,
         value: 1, 
         stop: function(event, ui) {
-            update("opacity", ui.value);
+            update("opacity", ui.value*ui.value*ui.value);
         }
     });
 
