@@ -1,4 +1,9 @@
+var height = 1.0;
+var space = 1.0;
+var thickness = 1.0;
+var opacity = 1.0;
 var power = 1.0;
+var color = "black";
 
 function lineWidth // for a couple of points on two neighbouring axes
 (
@@ -6,32 +11,19 @@ function lineWidth // for a couple of points on two neighbouring axes
     heightDifference, // between the points
     widthDifference // between the points = between the axes
 ) {
-
     if (lineMethod === "emphasize dis") {
         return 1;
-    }
-
+    } 
+    
     else if (lineMethod === "neutral") {
 
-        var method = 4;
-
-        if (method === 1) {
-            return 1 / Math.sqrt(heightDifference / widthDifference + 1);
-        }
-       
 		var alpha = Math.abs(Math.atan(heightDifference / widthDifference));
 
-        if (method === 2) {
-			return Math.cos(alpha);
-		}
-		if (method === 3) {
-			return Math.max(Math.cos(alpha * alpha), 0.2);
-		}
-		if (method === 4) {
-			return Math.pow(Math.cos(alpha), power);
-        }
-    }
-
+        return Math.pow(Math.cos(alpha), power);
+        // alternative method
+        // return 1 / Math.sqrt(heightDifference / widthDifference + 1);
+    } 
+    
     else { // experimental techniques, unused here
     
         alpha = Math.abs(Math.atan(heightDifference / widthDifference));
@@ -78,12 +70,12 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
 
     var svg = d3.select(pcTarget)
         .append("svg:svg")
-            .attr("width", 850 * scale_factor)
-            .attr("height", (h + m[0] + m[2]) * scale_factor)
+            .attr("width", 850 * scale_factor * space)
+            .attr("height", (h + m[0] + m[2]) * scale_factor * height)
             .append("svg:g")
-                .attr("transform", "translate(" + (-50 * scale_factor) + "," + (m[0] * scale_factor) + "), scale(" + scale_factor + ")")
+                .attr("transform", "translate(" + (-50 * scale_factor * space) + "," + (m[0] * scale_factor * height) + "), scale(" + scale_factor + ")")
                 .attr("draggable", "false")
-                .attr("viewBox", "0 0 850" + h + m[0] + m[2])
+                .attr("viewBox", "0 0 850" + h + m[0] + m[2]) //TODO: 
                 .attr("class", "box");
 
     d3.csv(file, function (data) {
@@ -119,7 +111,7 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
                 });
                 heightDifference = Math.abs(points[1][1] - points[0][1]);
                 widthDifference = Math.abs(points[1][0] - points[0][0]);
-                return lineWidth(lineMethod, heightDifference, widthDifference);
+                return lineWidth(lineMethod, heightDifference, widthDifference) * thickness;
             }
         }
 
@@ -153,7 +145,8 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
                         .append("svg:path")
                             .attr("d", createPathFunction(k))
                             .attr("stroke-width", createWidthFunction(k))
-                            .attr("data-stroke-width", createWidthFunction(k));
+                            .attr("opacity", opacity)
+                            .attr("stroke", color)
             }
             else if (lineMethod === "neutral polygon") {
                 // alternative rendering with polygon and without math
@@ -183,13 +176,6 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
         $(".domain").attr("stroke", "black");
         $(".domain").attr("fill", "none");
 
-        // Update properties from sliders. 
-        update("height",    Math.pow($("#slider-height")   .slider("value"), 2),    pcTarget);
-        update("space",     Math.pow($("#slider-space")    .slider("value"), 2),    pcTarget);
-        update("thickness", Math.pow($("#slider-thickness").slider("value"), 3),    pcTarget);
-        update("opacity",            $("#slider-opacity")  .slider("value"),        pcTarget);
-        update("colour",             $("#select-colour option:selected").val(),     pcTarget);
-
         $(pcTarget).css("display", "unset");
     });
 
@@ -197,5 +183,4 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
         var v = dragging[d];
         return v == null ? x(d) : v;
     }
-
 }
