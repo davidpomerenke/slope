@@ -4,6 +4,7 @@ var thickness = 1.0;
 var opacity = 1.0;
 var power = 1.0;
 var color = "black";
+var scale = 1.0;
 
 function lineWidth // for a couple of points on two neighbouring axes
 (
@@ -54,11 +55,11 @@ function lineWidth // for a couple of points on two neighbouring axes
  - neutral polygon:              adjust line width with polygon; poorer anti-aliasing
  - neutral bold  (experimental): neutral; line width corresponds to boldest possible line in emphasize dis
  - emphasize sim (experimental): revert emphasize dis effect; useless */
-function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
+function pcVis(file, pcTarget, lineMethod) {
 
-    var m = [10, 10, 10, 10],
-        w = 960 - m[1] - m[3],
-        h = 500 - m[0] - m[2];
+    var m = [10 * height * scale, 10 * space * scale, 10 * height * scale, 10 * space * scale],
+        w = (480 - m[1] - m[3]) * scale * space,
+        h = (250 - m[0] - m[2]) * scale * height;
 
     var x = d3.scale.ordinal().rangePoints([0, w], 1),
         y = {},
@@ -70,12 +71,12 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
 
     var svg = d3.select(pcTarget)
         .append("svg:svg")
-            .attr("width", 850 * scale_factor * space)
-            .attr("height", (h + m[0] + m[2]) * scale_factor * height)
+            .attr("width", w  + m[1] + m[3])
+            .attr("height", h + m[0] + m[2])
+            .attr("shape-rendering", "geometricPrecision")
             .append("svg:g")
-                .attr("transform", "translate(" + (-50 * scale_factor * space) + "," + (m[0] * scale_factor * height) + "), scale(" + scale_factor + ")")
+                .attr("transform", "translate(" + m[1] + "," + m[0] + "), scale(" + scale + ")")
                 .attr("draggable", "false")
-                .attr("viewBox", "0 0 850" + h + m[0] + m[2]) //TODO: 
                 .attr("class", "box");
 
     d3.csv(file, function (data) {
@@ -88,7 +89,7 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
 
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(data[0]).filter(function (d) {
-            return d !== "ObjectID" && d !== "id" && d !== "ObjectId" && (y[d] = d3.scale.linear()
+            return d !== "ObjectID" && d !== "id" && d !== "ObjectId" && d != "Cluster" && (y[d] = d3.scale.linear()
                 .domain([0, 1])
                 .range([h, 0]));
         }));
@@ -145,8 +146,10 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
                         .append("svg:path")
                             .attr("d", createPathFunction(k))
                             .attr("stroke-width", createWidthFunction(k))
-                            .attr("opacity", opacity)
+                            .attr("stroke-opacity", opacity)
                             .attr("stroke", color)
+                            .attr("shape-rendering", "geometricPrecision")
+                            .attr("fill", "none");
             }
             else if (lineMethod === "neutral polygon") {
                 // alternative rendering with polygon and without math
@@ -155,6 +158,12 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
                     .data(data).enter()
                         .append("svg:polygon")
                             .attr("points", createPolygonFunction(k))
+                            .attr("fill", color)
+                            .attr("stroke", none)
+                            .attr("stroke-opacity", opacity)
+                            .attr("stroke", color)
+                            .attr("shape-rendering", "geometricPrecision")
+                            .attr("fill", "none");
             }
         }
 
@@ -173,9 +182,12 @@ function pcVis(file, pcTarget, lineMethod, scale_factor = 1) {
             .each(function (d) {
                 d3.select(this).call(axis.scale(y[d]).ticks(0));
             });
-        $(".domain").attr("stroke", "black");
-        $(".domain").attr("fill", "none");
 
+        $(".domain")
+            .attr("stroke", "black")
+            .attr("fill", "none")
+            .attr("shape-rendering", "geometricPrecision");
+        
         $(pcTarget).css("display", "unset");
     });
 

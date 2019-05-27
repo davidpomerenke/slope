@@ -30,7 +30,7 @@ function toggleVis(file) {
         activeFiles.add(file);
     }
 
-    var i = files.indexOf(file);
+    var i = files.map(f => f[0]).indexOf(file);
 
     ["a", "b"].forEach(s => {
 
@@ -91,45 +91,74 @@ function main() {
         }
     });
 
-    for (i of [150, 200, 300, 400]) {
-        files.push("data/noise/RandomNoise/datasets/Noise_"+i+".csv");
+    // add all file names and short descriptions
+    for (i of [100, 200, 400, 800]) {
+        files.push(["data/uniform/"+i+"/"+i+".fv2.csv", "UN"+i])
     }
-
-    for (i=250; i<=400; i+=50) {
-        files.push("data/noise/70%Linear_NoiseOnly/datasets/Noise_"+i+".csv");
+    for (i of [100, 200, 400, 800]) {
+        files.push(["data/linear/"+i+"/"+i+".fv2.csv", "LN"+i])
     }
-
-    for (noise=0; noise<=300; noise+=150) {
-        for (i=1; i<=4; i++) {
-            files.push("data/synthetic/FinalVersion/Original/" + noise + "N/DefaultOrdering/" + i + "C." + 1 + ".csv");
-        }
+    for (i of [100, 200, 400, 800]) {
+        files.push(["data/gaussian/"+i+"/"+i+".fv2.csv", "GN"+i])
     }
-
+    for (i of [100, 200, 400, 800]) {
+        files.push(["data/top/top"+i+"/top"+i+".fv2.csv", "CN"+i])
+    }
     for (file of [
         //"RW03-ecoli-normalized.csv", 
         //"RW06-iris-normalized.csv", 
-        "RW09-seeds-normalized.csv", 
-        "RW01-airquality-normalized.csv", 
-        "RW04-forestfires-normalized.csv", 
-        "RW07-wine-normalized.csv", 
+        ["RW09-seeds-normalized.csv", "Seeds"], 
+        ["RW01-airquality-normalized.csv", "Air Quality"],
+        ["RW04-forestfires-normalized.csv", "Forest Fires"],
+        ["RW07-wine-normalized.csv", "Wine"],
         //"RW10-stoneFlakes-normalized.csv", 
         //"RW02-breasttissue-normalized.csv", 
         //"RW05-glass-normalized.csv", 
         //"RW08-mtCars-normalized.csv"
-    ]) { files.push("data/realworld datasets/FinalVersion/" + file); }
-
-    var wrapper = document.getElementById("main");
+    ]) { files.push(["data/realworld datasets/FinalVersion/" + file[0], file[1]]); }
 
     var i = 0; 
 
     for (file of files) {
 
-        var row = document.createElement("div")
-        row.setAttribute("class", "row");
-        wrapper.appendChild(row);
+        var headings = {
+            0: "Random Noise", 
+            4: "Linear Noise", //+- 0.2
+            8: "Gaussian Noise", 
+            12: "Synthetic Data", 
+            16: "Real World Data" };
+        if (Object.keys(headings).includes(i+"")) {
+            var checkboxgroup = $("<section>")
+                .attr("class", "checkboxgroup")
+                .appendTo("#boxes");
+            $("<b>")
+                .text(headings[i])
+                .appendTo(checkboxgroup);
+        }
 
-        row.appendChild(document.createElement("div")).setAttribute("id", "pcTarget"+i+"a");
-        row.appendChild(document.createElement("div")).setAttribute("id", "pcTarget"+i+"b");
+        // create checkboxes
+        var section = $("<section>")
+            .appendTo(checkboxgroup);
+        $("<input>")
+            .attr("type", "checkbox")
+            .attr("id", file[0])
+            .attr("onChange", "toggleVis('"+file[0]+"')")
+            .appendTo(section);
+        $("<label>")
+            .attr("for", file[0])
+            .text(file[1])
+            .appendTo(section);
+
+        // create targets for ordered figures
+        var comparebox = $("<div>")
+            .attr("class", "row")
+            .appendTo("main");
+        $("<div>")
+            .attr("id", "pcTarget"+i+"a")
+            .appendTo(comparebox);
+        $("<div>")
+            .attr("id", "pcTarget"+i+"b")
+            .appendTo(comparebox);
 
         i++;
     }

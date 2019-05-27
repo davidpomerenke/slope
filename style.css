@@ -19,7 +19,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
     width: 880px;
-    height: 280px;
+    height: 215px;
     margin-top: 10px;
     padding: 10px;
     background-color: #fff;
@@ -31,17 +31,13 @@ header {
     justify-content: space-between;
 }
 
-header h3, header section section {
-    padding-bottom: 5px;
-}
-
 section.checkboxgroup {
     display: flex;
-    justify-content: space-between;
+    justify-content: stretch;
 }
 
-section.checkboxgroup section {
-    padding-right: 5px;
+section.checkboxgroup * {
+    flex: 1 1 0;
 }
 
 header #sliders {
@@ -49,14 +45,14 @@ header #sliders {
 }
 
 header .slidewrapper {
-    padding: 10px;
+    padding: 5px;
 }
 
 .ui-slider, #select-colour {
-    width: 200px;
+    width: 150px;
     float: right;
     margin-left: 20px;
-    margin-top: 3px;
+    margin-top: 0px;
 }
 
 .ui-slider-handle {
@@ -73,4 +69,10 @@ main {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
+}
+
+svg, svg * {
+    shape-rendering: geometricPrecision;
+    display: block;
+    margin: 0px;
 }
