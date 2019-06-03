@@ -1,1 +1,2 @@
 TimeID	ClusterName	MainCluster	SubClusterOf	SamplingType	ObjectID	Start	End	Samples	BottomGap	TopGap
+0	Class_1	Class_1	null	Uniform	0	0.0	1.0	100.0	0.0	1.0

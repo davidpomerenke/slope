@@ -1,7 +1,7 @@
 var files = [];
 var activeFiles = new Set();
 
-function update(parameter, value, id="") {
+function update(parameter, value) {
 
     if (parameter === "height") {
         height = value;
@@ -104,6 +104,9 @@ function main() {
     for (i of [100, 200, 400, 800]) {
         files.push(["data/top/top"+i+"/top"+i+".fv2.csv", "CN"+i])
     }
+    for (i of [0, 100, 200, 400]) {
+        files.push(["data/maxvar/"+i+"/"+i+".fv2.csv", "MV"+i])
+    }
     for (file of [
         //"RW03-ecoli-normalized.csv", 
         //"RW06-iris-normalized.csv", 
@@ -126,7 +129,8 @@ function main() {
             4: "Linear Noise", //+- 0.2
             8: "Gaussian Noise", 
             12: "Synthetic Data", 
-            16: "Real World Data" };
+            16: "Variance",
+            20: "Real World Data" };
         if (Object.keys(headings).includes(i+"")) {
             var checkboxgroup = $("<section>")
                 .attr("class", "checkboxgroup")

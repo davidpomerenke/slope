@@ -1,0 +1,5 @@
+TimeID	ClusterName	MainCluster	SubClusterOf	SamplingType	ObjectID	Start	End	Samples	BottomGap	TopGap
+0	Class_2	Class_2	null	Uniform	0	0.3693379790940766	0.6202090592334495	50.0	0.3693379790940766	0.6202090592334495
+0	Class_1	Class_1	null	Uniform	1	0.7508710801393728	1.0	50.0	0.7508710801393728	1.0
+0	Class_4	Class_4	null	Uniform	2	0.0	1.0	200.0	0.0	1.0
+0	Class_3	Class_3	null	Uniform	3	0.0	0.24564459930313587	50.0	0.0	0.24564459930313587
