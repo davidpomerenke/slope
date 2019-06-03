@@ -12,7 +12,7 @@ function update(parameter, value) {
     } else if (parameter === "opacity") {
         opacity = value+"";
     } else if (parameter === "colour") {
-        colour = $("#select-colour").val();
+        color = $("#select-colour").val();
     } else if (parameter === "power") {
         console.log("P: " + value);
         power = value;

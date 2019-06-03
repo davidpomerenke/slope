@@ -150,6 +150,7 @@ function pcVis(file, pcTarget, lineMethod) {
                             .attr("stroke", color)
                             .attr("shape-rendering", "geometricPrecision")
                             .attr("fill", "none");
+            
             }
             else if (lineMethod === "neutral polygon") {
                 // alternative rendering with polygon and without math
