@@ -118,7 +118,7 @@ function main() {
         //"RW02-breasttissue-normalized.csv", 
         //"RW05-glass-normalized.csv", 
         //"RW08-mtCars-normalized.csv"
-    ]) { files.push(["data/realworld datasets/FinalVersion/" + file[0], file[1]]); }
+    ]) { files.push(["data/realworld/FinalVersion/" + file[0], file[1]]); }
 
     var i = 0; 
 
