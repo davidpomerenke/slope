@@ -130,6 +130,21 @@ function pcVis(file, pcTarget, lineMethod) {
                     + points[1][0] + "," +  points[1][1]      + " "
             }
         }
+
+        function createColourFunction(k) {
+            return function(d) {
+                colors = {
+                    "Class_1": "grey",
+                    "Class_2": "blue",
+                    "Class_3": "red",
+                    "Class_4": "red",
+                    "Class_5": "green",
+                    "Class_6": "violet",
+                    "Class_7": "yellow"
+                };
+                return colors[d["Cluster"]];
+            }
+        }
         
         foreground = [];
 
@@ -147,10 +162,9 @@ function pcVis(file, pcTarget, lineMethod) {
                             .attr("d", createPathFunction(k))
                             .attr("stroke-width", createWidthFunction(k))
                             .attr("stroke-opacity", opacity)
-                            .attr("stroke", color)
+                            .attr("stroke", color === "multi" ? createColourFunction(k) : color)
                             .attr("shape-rendering", "geometricPrecision")
                             .attr("fill", "none");
-            
             }
             else if (lineMethod === "neutral polygon") {
                 // alternative rendering with polygon and without math
