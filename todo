@@ -1,0 +1,6 @@
+- power parameter von den unwichtigeren parametern abgrenzen
+- beschriftungen layouten
+- zahlen an slidern anzeigen
+- schalter für polygon rendring vs line rendering
+- erklärung für server starten in anhang von paper
+- also make opacity angle-dependent (optional)
