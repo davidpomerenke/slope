@@ -19,7 +19,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
     width: 880px;
-    height: 215px;
+    height: 200px;
     margin-top: 10px;
     padding: 10px;
     background-color: #fff;
@@ -29,6 +29,7 @@ header {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    font-size: 13px;
 }
 
 section.checkboxgroup {
@@ -40,27 +41,81 @@ section.checkboxgroup * {
     flex: 1 1 0;
 }
 
-header #sliders {
-    max-width: 400px;
+header #boxes {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    align-content: stretch;
 }
 
-header .slidewrapper {
+header #sliders {
+    max-width: 500px;
+}
+
+header .slidewrapper, header section.checkboxgroup {
+    height: 25px;
     padding: 5px;
+}
+
+.slidewrapper div.number {
+    float: right;
+    width: 30px;
+    padding-left: 15px;
 }
 
 .ui-slider, #select-colour {
     width: 150px;
-    float: right;
     margin-left: 20px;
     margin-top: 0px;
+    float:right;
+}
+
+select {
+    height: 14px;
+    margin-right: 30px;
 }
 
 .ui-slider-handle {
     border-radius: 10px;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 20;
+    top: -40px;
+    left: 120%;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+  }
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 main {
-    padding-top: 310px;
+    padding-top: 230px;
     padding-bottom: 20px;
 }
 

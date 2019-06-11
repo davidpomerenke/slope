@@ -15,41 +15,65 @@
         </section>
         <section id="sliders">
             <section class="slidewrapper">
+                <label for="slider-power">
+                    <b>
+                        Parameter <i>P</i>
+                    </b>
+                </label>
+                <div id="show-power" class="number">1</div>
+                <div id="slider-power"></div>
+            </section>
+            <section class="slidewrapper">
+                <input type="checkbox" class="linkcheck" id="linewidthcheck" checked>
+                <label for="slider-thickness" class="tooltip">
+                    Line Width
+                    <div class="tooltiptext">
+                        Check the box to apply the adjustment method to line width in the right figures. 
+                        Slide to adjust the constant line width factor in both the left and right figure. 
+                    </div>
+                </label>
+                <div id="show-linewidth" class="number">1</div>
+                <div id="slider-thickness"></div>
+            </section>
+            <section class="slidewrapper">
+                <input type="checkbox" class="linkcheck" id="opacitycheck">
+                <label for="slider-opacity" class="tooltip">
+                    Opacity
+                    <div class="tooltiptext">
+                        Check the box to apply the adjustment method to opacity in the right figures. 
+                        Slide to adjust the constant opacity factor in both the left and right figure. 
+                    </div>
+                </label>
+                <div id="show-opacity" class="number">1</div>
+                <div id="slider-opacity"></div>
+            </section>
+            <section class="slidewrapper">
+                <label for="slider-c">
+                    Parameter <i>c</i>
+                </label>
+                <div id="show-c" class="number">1</div>
+                <div id="slider-c"></div>
+            </section>
+            <section class="slidewrapper">
                 <label for="slider-height">
                     Height
                 </label>
+                <div id="show-height" class="number">1</div>
                 <div id="slider-height"></div>
             </section>
             <section class="slidewrapper">
                 <label for="slider-space">
                     Space
                 </label>
+                <div id="show-space" class="number">1</div>
                 <div id="slider-space"></div>
-            </section>
-            <section class="slidewrapper">
-                <label for="slider-thickness">
-                    Thickness
-                </label>
-                <div id="slider-thickness"></div>
-            </section>
-            <section class="slidewrapper">
-                <label for="slider-opacity">
-                    Opacity
-                </label>
-                <div id="slider-opacity"></div>
-            </section>
-            <section class="slidewrapper">
-                <label for="slider-power">
-                    Power
-                </label>
-                <div id="slider-power"></div>
             </section>
             <section class="slidewrapper">
                 <label for="select-colour">
                     Colour
                 </label>
                 <select id="select-colour" onchange="update('colour')">
-                    <option value="multi">          multi-coloured </option>
+                    <option value="multi">          multi-colour</option>
                     <option value="black" selected> black</option>
                     <option value="#466db4">        blue </option>
                     <option value="red">            red  </option>

@@ -2,13 +2,17 @@ var files = [];
 var activeFiles = new Set();
 
 function update(parameter, value) {
+    
+    $("#show-" + parameter).text(Math.round(value * 10) / 10);
 
     if (parameter === "height") {
         height = value;
     } else if (parameter === "space") {
-        space = value; 
-    } else if (parameter === "thickness") {
-        thickness = value;
+        space = value;
+    } else if (parameter === "c") {
+        c = value;
+    } else if (parameter === "linewidth") {
+        linewidth = value;
     } else if (parameter === "opacity") {
         opacity = value+"";
     } else if (parameter === "colour") {
@@ -35,7 +39,7 @@ function toggleVis(file) {
     ["a", "b"].forEach(s => {
 
         if ($("#pcTarget"+i+s).html() === "") {
-            pcVis(file, "#pcTarget"+i+s, (s === "a" ? "emphasize dis" : "neutral"), 0.5);
+            pcVis(file, "#pcTarget"+i+s, (s === "a" ? "original" : "adjusted"), 0.5);
         }
         else {
             $("#pcTarget"+i+s).html("");
@@ -46,10 +50,12 @@ function toggleVis(file) {
 
 function main() {
     
-    $("input:checkbox").removeAttr("checked").prop("checked", false);
+    $("input:checkbox :not(.linkcheck)").removeAttr("checked").prop("checked", false);
+
+    $(".linkcheck").attr("onchange", "update()");
 
     // jQuery UI slider function
-    ["height", "space"].forEach(function(parameter){
+    ["height", "space", "c"].forEach(function(parameter){
         $("#slider-" + parameter).slider({
             step: 0.05,
             min: 0.6,
@@ -67,7 +73,7 @@ function main() {
         max: 5,
         value: 1, 
         stop: function(event, ui) {
-            update("thickness", ui.value * ui.value * ui.value);
+            update("linewidth", ui.value * ui.value * ui.value);
         }
     }); 
 
@@ -118,7 +124,7 @@ function main() {
         //"RW02-breasttissue-normalized.csv", 
         //"RW05-glass-normalized.csv", 
         //"RW08-mtCars-normalized.csv"
-    ]) { files.push(["data/realworld/FinalVersion/" + file[0], file[1]]); }
+    ]) { files.push(["data/realworld/" + file[0], file[1]]); }
 
     var i = 0; 
 
@@ -130,7 +136,7 @@ function main() {
             8: "Gaussian Noise", 
             12: "Synthetic Data", 
             16: "Variance",
-            20: "Real World Data" };
+            20: "Realworld Data" };
         if (Object.keys(headings).includes(i+"")) {
             var checkboxgroup = $("<section>")
                 .attr("class", "checkboxgroup")

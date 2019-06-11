@@ -1,28 +1,26 @@
 var height = 1.0;
 var space = 1.0;
-var thickness = 1.0;
+var linewidth = 1.0;
 var opacity = 1.0;
 var power = 1.0;
 var color = "black";
 var scale = 1.0;
+var c = 1.0;
 
-function lineWidth // for a couple of points on two neighbouring axes
+function adjustment // for a couple of points on two neighbouring axes
 (
-    lineMethod, 
+    method, 
     heightDifference, // between the points
     widthDifference // between the points = between the axes
 ) {
-    if (lineMethod === "emphasize dis") {
+    if (method === "original") {
         return 1;
     } 
     
-    else if (lineMethod === "neutral") {
+    else if (method === "adjusted") {
 
 		var alpha = Math.abs(Math.atan(heightDifference / widthDifference));
-
-        return Math.pow(Math.cos(alpha), power);
-        // alternative method
-        // return 1 / Math.sqrt(heightDifference / widthDifference + 1);
+        return Math.pow(Math.cos(alpha), power) * c;
     } 
     
     else { // experimental techniques, unused here
@@ -33,11 +31,11 @@ function lineWidth // for a couple of points on two neighbouring axes
         
         alpha_max = Math.abs(Math.atan(maxHeightDifference / widthDifference));
 
-        if (lineMethod === "neutral bold") {
+        if (method === "neutral bold") {
             return Math.abs(Math.cos(alpha)) / Math.abs(Math.cos(alpha_max)) / 2;
         }
 
-        else if (lineMethod === "emphasize sim") {
+        else if (method === "emphasize sim") {
             return Math.abs(Math.cos(alpha)) / Math.abs(Math.cos(alpha_max - alpha));
         }
 
@@ -45,17 +43,16 @@ function lineWidth // for a couple of points on two neighbouring axes
             console.log("Error: Invalid line method specified.");
             return 0;
         }
-
     }
 }
 
 /* lineMethod
- - emphasize dis:                normal lines
- - neutral:                      adjust line width with math
- - neutral polygon:              adjust line width with polygon; poorer anti-aliasing
+ - original:                     normal lines
+ - adjusted:                     adjust line width with math
+ - polygon:                      adjust line width with polygon; poorer anti-aliasing
  - neutral bold  (experimental): neutral; line width corresponds to boldest possible line in emphasize dis
  - emphasize sim (experimental): revert emphasize dis effect; useless */
-function pcVis(file, pcTarget, lineMethod) {
+function pcVis(file, pcTarget, method) {
 
     var m = [10 * height * scale, 10 * space * scale, 10 * height * scale, 10 * space * scale],
         w = (480 - m[1] - m[3]) * scale * space,
@@ -89,10 +86,22 @@ function pcVis(file, pcTarget, lineMethod) {
 
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(data[0]).filter(function (d) {
-            return d !== "ObjectID" && d !== "id" && d !== "ObjectId" && d != "Cluster" && (y[d] = d3.scale.linear()
+            return d !== "ObjectID" && d !== "id" && d !== "ObjectId" && d != "Cluster" && d !== "cluster" && (y[d] = d3.scale.linear()
                 .domain([0, 1])
                 .range([h, 0]));
         }));
+
+        var categories = new Set();
+        data.forEach(d => {
+            categories.add(d[Object.keys(d)[0]]);
+        });
+        colors = ["grey", "blue", "red", "green", "turquoise", "violet", "yellow"];
+        colormap = {};
+        i = 0;
+        for (cat of categories) {
+            colormap[cat] = colors[i % colors.length];
+            i++;
+        }
         
         // Returns the path for a given data point.
         // cf. https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example
@@ -105,14 +114,15 @@ function pcVis(file, pcTarget, lineMethod) {
             }
         }
 
-        function createWidthFunction(k) {
+        function createAdjustmentFunction(k, factor) {
             return function(d) {
                 points = [dimensions[k],dimensions[k+1]].map(function (p) {
                     return [position(p), y_scale(d[p])];
                 });
                 heightDifference = Math.abs(points[1][1] - points[0][1]);
                 widthDifference = Math.abs(points[1][0] - points[0][0]);
-                return lineWidth(lineMethod, heightDifference, widthDifference) * thickness;
+
+                return adjustment(method, heightDifference, widthDifference) * factor;
             }
         }
 
@@ -133,16 +143,7 @@ function pcVis(file, pcTarget, lineMethod) {
 
         function createColourFunction(k) {
             return function(d) {
-                colors = {
-                    "Class_1": "grey",
-                    "Class_2": "blue",
-                    "Class_3": "red",
-                    "Class_4": "red",
-                    "Class_5": "green",
-                    "Class_6": "violet",
-                    "Class_7": "yellow"
-                };
-                return colors[d["Cluster"]];
+                return colormap[d[Object.keys(d)[0]]];
             }
         }
         
@@ -155,30 +156,43 @@ function pcVis(file, pcTarget, lineMethod) {
                 .attr("class", "foreground")
                 .attr("id", "fground"+k);
 
-            if (lineMethod != "neutral polygon") {
+            if (method != "polygon") {
                 foreground[k].selectAll("path")
                     .data(data).enter()
                         .append("svg:path")
                             .attr("d", createPathFunction(k))
-                            .attr("stroke-width", createWidthFunction(k))
-                            .attr("stroke-opacity", opacity)
-                            .attr("stroke", color === "multi" ? createColourFunction(k) : color)
+                            .attr("stroke-width", 
+                                $("#linewidthcheck").is(":checked") 
+                                    ? createAdjustmentFunction(k, linewidth) 
+                                    : linewidth)
+                            .attr("stroke-opacity", 
+                                $("#opacitycheck").prop("checked") 
+                                    ? createAdjustmentFunction(k, opacity) 
+                                    : opacity)
+                            .attr("stroke", 
+                                color === "multi" 
+                                ? createColourFunction(k) 
+                                : color)
                             .attr("shape-rendering", "geometricPrecision")
                             .attr("fill", "none");
             }
-            else if (lineMethod === "neutral polygon") {
+            else if (method === "polygon") {
                 // alternative rendering with polygon and without math
                 // unfortunately, anti-aliasing is poorer than the above method
                 foreground[k].selectAll("path")
                     .data(data).enter()
                         .append("svg:polygon")
                             .attr("points", createPolygonFunction(k))
-                            .attr("fill", color)
+                            .attr("fill", 
+                                color === "multi" 
+                                ? createColourFunction(k) 
+                                : color)
                             .attr("stroke", none)
-                            .attr("stroke-opacity", opacity)
-                            .attr("stroke", color)
+                            .attr("stroke-opacity", 
+                                $("#opacitycheck").prop("checked") 
+                                    ? createAdjustmentFunction(k, opacity) 
+                                    : opacity)
                             .attr("shape-rendering", "geometricPrecision")
-                            .attr("fill", "none");
             }
         }
 
