@@ -19,7 +19,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
     width: 880px;
-    height: 200px;
+    height: 230px;
     margin-top: 10px;
     padding: 10px;
     background-color: #fff;
@@ -63,7 +63,7 @@ header .slidewrapper, header section.checkboxgroup {
     padding-left: 15px;
 }
 
-.ui-slider, #select-colour {
+.ui-slider, select {
     width: 150px;
     margin-left: 20px;
     margin-top: 0px;
@@ -114,8 +114,12 @@ select {
     visibility: visible;
 }
 
+#h {
+    text-decoration: overline;
+}
+
 main {
-    padding-top: 230px;
+    padding-top: 250px;
     padding-bottom: 20px;
 }
 

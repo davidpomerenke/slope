@@ -18,8 +18,9 @@ function update(parameter, value) {
     } else if (parameter === "colour") {
         color = $("#select-colour").val();
     } else if (parameter === "power") {
-        console.log("P: " + value);
         power = value;
+    } else if (parameter === "rendering") {
+        rendering = $("#select-rendering").val();
     }
     // Toggle off and on for an update
     var copy = Array.from(activeFiles);
@@ -89,7 +90,7 @@ function main() {
 
     $("#slider-power").slider({
         step: 0.05,
-        min: 0.05,
+        min: -2,
         max: 5,
         value: 1,
         stop: function(event, ui) {

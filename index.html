@@ -48,8 +48,14 @@
                 <div id="slider-opacity"></div>
             </section>
             <section class="slidewrapper">
-                <label for="slider-c">
-                    Parameter <i>c</i>
+                <label for="slider-c" class="tooltip">
+                    Parameter 
+                    <i id="h">
+                        h
+                    </i>
+                    <div class="tooltiptext">
+                        <i id="h">h</i> is a line height adjustment factor applying with equal force to all lines to the (adjusted) figures displayed at the right side. It can be used to manually accomodate average line heights in the left and right figures. 
+                    </div>
                 </label>
                 <div id="show-c" class="number">1</div>
                 <div id="slider-c"></div>
@@ -78,6 +84,18 @@
                     <option value="#466db4">        blue </option>
                     <option value="red">            red  </option>
                     <option value="green">          green</option>
+                </select>
+            </section>
+            <section class="slidewrapper">
+                <label for="select-rendering" class="tooltip">
+                    Rendering 
+                    <div class="tooltiptext">
+                        Select "polygon" to render parallelograms with fixed height instead of lines in the right figure (not recommended). Parameter <i>P</i> and the "line width" checkbox will be ignored. 
+                    </div>
+                </label>
+                <select id="select-rendering" onchange="update('rendering')">
+                    <option value="line" selected>lines  </option>
+                    <option value="polygon">      polygon</option>
                 </select>
             </section>
         </section>

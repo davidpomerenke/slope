@@ -6,6 +6,7 @@ var power = 1.0;
 var color = "black";
 var scale = 1.0;
 var c = 1.0;
+var rendering ="line";
 
 function adjustment // for a couple of points on two neighbouring axes
 (
@@ -126,7 +127,7 @@ function pcVis(file, pcTarget, method) {
             }
         }
 
-        function createPolygonFunction(k) {
+        function createPolygonFunction(k, factor) {
             return function(d) {
                 points = [dimensions[k],dimensions[k+1]].map(function (p) {
                     return [position(p), y_scale(d[p])];
@@ -135,8 +136,8 @@ function pcVis(file, pcTarget, method) {
                 widthDifference = Math.abs(points[1][0] - points[0][0]);
                 return ""
                     + points[0][0] + "," +  points[0][1]      + " "
-                    + points[0][0] + "," + (points[0][1] + 1) + " "
-                    + points[1][0] + "," + (points[1][1] + 1) + " "
+                    + points[0][0] + "," + (points[0][1] + factor) + " "
+                    + points[1][0] + "," + (points[1][1] + factor) + " "
                     + points[1][0] + "," +  points[1][1]      + " "
             }
         }
@@ -156,7 +157,7 @@ function pcVis(file, pcTarget, method) {
                 .attr("class", "foreground")
                 .attr("id", "fground"+k);
 
-            if (method != "polygon") {
+            if (method === "original" || rendering === "line") {
                 foreground[k].selectAll("path")
                     .data(data).enter()
                         .append("svg:path")
@@ -176,19 +177,19 @@ function pcVis(file, pcTarget, method) {
                             .attr("shape-rendering", "geometricPrecision")
                             .attr("fill", "none");
             }
-            else if (method === "polygon") {
+            else if (method === "adjusted" && rendering === "polygon") {
                 // alternative rendering with polygon and without math
                 // unfortunately, anti-aliasing is poorer than the above method
                 foreground[k].selectAll("path")
                     .data(data).enter()
                         .append("svg:polygon")
-                            .attr("points", createPolygonFunction(k))
+                            .attr("points", createPolygonFunction(k, c))
                             .attr("fill", 
                                 color === "multi" 
                                 ? createColourFunction(k) 
                                 : color)
-                            .attr("stroke", none)
-                            .attr("stroke-opacity", 
+                            .attr("stroke", "none")
+                            .attr("opacity", 
                                 $("#opacitycheck").prop("checked") 
                                     ? createAdjustmentFunction(k, opacity) 
                                     : opacity)
