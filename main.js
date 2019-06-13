@@ -125,7 +125,13 @@ function main() {
         //"RW02-breasttissue-normalized.csv", 
         //"RW05-glass-normalized.csv", 
         //"RW08-mtCars-normalized.csv"
-    ]) { files.push(["data/realworld/" + file[0], file[1]]); }
+    ]) { 
+        files.push(["data/realworld/" + file[0], file[1]]); 
+    }
+
+    for (ownfile of ownFiles) {
+        files.push(["data/own/"+ownfile[0], ownfile[1]]);
+    }
 
     var i = 0; 
 
@@ -137,7 +143,8 @@ function main() {
             8: "Gaussian Noise", 
             12: "Synthetic Data", 
             16: "Variance",
-            20: "Realworld Data" };
+            20: "Realworld Data",
+            24: "Own Datasets" };
         if (Object.keys(headings).includes(i+"")) {
             var checkboxgroup = $("<section>")
                 .attr("class", "checkboxgroup")
