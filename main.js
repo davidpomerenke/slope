@@ -98,24 +98,22 @@ function main() {
         }
     });
 
+    // define headings for datasets
+    var headings = {
+            0: "Random Noise", 
+            4: "Linear Noise", //+- 0.2
+            8: "Gaussian Noise", 
+            12: "Synthetic Data", 
+            16: "Variance",
+            20: "Correlations", 
+            24: "Realworld Data",
+            28: "Own Datasets" };
+
     // add all file names and short descriptions
-    for (i of [100, 200, 400, 800]) {
-        files.push(["data/uniform/"+i+"/"+i+".fv2.csv", "UN"+i])
-    }
-    for (i of [100, 200, 400, 800]) {
-        files.push(["data/linear/"+i+"/"+i+".fv2.csv", "LN"+i])
-    }
-    for (i of [100, 200, 400, 800]) {
-        files.push(["data/gaussian/"+i+"/"+i+".fv2.csv", "GN"+i])
-    }
-    for (i of [100, 200, 400, 800]) {
-        files.push(["data/top/top"+i+"/top"+i+".fv2.csv", "CN"+i])
-    }
-    for (i of [0, 100, 200, 400]) {
-        files.push(["data/maxvar/"+i+"/"+i+".fv2.csv", "MV"+i])
-    }
-    for (i of [100, 200, 400, 800]) {
-        files.push(["data/correlated/"+i+".csv", "COR"+i])
+    for (dataset of ["uniform", "linear", "gaussian", "synthetic", "maxvar", "correlated"]) {
+        for (i of [100, 200, 400, 800]) {
+            files.push(["data/"+dataset+"/"+i+".csv", "N"+i])
+        }
     }
     for (file of [
         //"RW03-ecoli-normalized.csv", 
@@ -137,18 +135,10 @@ function main() {
     }
 
     var i = 0; 
-
+    
+    // create headers for checkboxes and target areas for plots
     for (file of files) {
-
-        var headings = {
-            0: "Random Noise", 
-            4: "Linear Noise", //+- 0.2
-            8: "Gaussian Noise", 
-            12: "Synthetic Data", 
-            16: "Variance",
-            20: "Correlations", 
-            24: "Realworld Data",
-            28: "Own Datasets" };
+            
         if (Object.keys(headings).includes(i+"")) {
             var checkboxgroup = $("<section>")
                 .attr("class", "checkboxgroup")
