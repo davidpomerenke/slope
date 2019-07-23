@@ -51,3 +51,16 @@ In this case, parameter P has no effect any longer.
 Own datasets can be added as _csv_-files in the subdirectory _data/own/_.
 File names have to be added to the _list.js_ file inside this directory. 
 An optional column _cluster_ in the _csv_-file may be used for the multi-colour display option.
+
+### Data creation
+
+Most of the datasets for the tool have been created with: 
+
+> PCDC - On the Highway to Data - A Tool for the Fast Generation of Large Synthetic Data Sets. 
+Sebastian Bremm, Martin Heß, Tatiana Von Landesberger & Dieter W. Fellner. 
+Work published 2012 via The Eurographics Association. 
+EuroVA 2012: International Workshop on Visual Analytics. 
+[doi.org/10.2312/pe/eurovast/eurova12/007-011](https://doi.org/10.2312/pe/eurovast/eurova12/007-011)
+
+This process can be replicated by loading the _.ini_-files from the data folder to the _PCDC_ tool. 
+Unfortunately, the tool appears not to be available online at the moment. 
