@@ -27,8 +27,8 @@ The tool is online at [davidpomerenke.github.io/slope](https://davidpomerenke.gi
 Loading data files locally is disabled in browsers for security reason. Therefore,
 a local webserver has to be started; this can be easily done with Python.
 
-Please navigate inside the main directory of the ZIP-file (which also includes
-this PDF and the _index.html_. From this directory, execute:
+Please navigate inside the main directory (which also includes
+this PDF and the _index.html_). From this directory, execute:
 
     python -m http.server
 
