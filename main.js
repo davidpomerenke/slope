@@ -114,6 +114,9 @@ function main() {
     for (i of [0, 100, 200, 400]) {
         files.push(["data/maxvar/"+i+"/"+i+".fv2.csv", "MV"+i])
     }
+    for (i of [100, 200, 400, 800]) {
+        files.push(["data/correlated/"+i+".csv", "COR"+i])
+    }
     for (file of [
         //"RW03-ecoli-normalized.csv", 
         //"RW06-iris-normalized.csv", 
@@ -143,8 +146,9 @@ function main() {
             8: "Gaussian Noise", 
             12: "Synthetic Data", 
             16: "Variance",
-            20: "Realworld Data",
-            24: "Own Datasets" };
+            20: "Correlations", 
+            24: "Realworld Data",
+            28: "Own Datasets" };
         if (Object.keys(headings).includes(i+"")) {
             var checkboxgroup = $("<section>")
                 .attr("class", "checkboxgroup")
