@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,10 @@
         Line Adjustment
     </title>
     <link rel="stylesheet" href="lib/jquery-ui.min.css">
+    <link rel="stylesheet" href="lib/jquery.fancybox.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body onload="main()">
     <header>
         <section id="boxes">
@@ -28,8 +31,8 @@
                 <label for="slider-thickness" class="tooltip">
                     Line Width
                     <div class="tooltiptext">
-                        Check the box to apply the adjustment method to line width in the right figures. 
-                        Slide to adjust the constant line width factor in both the left and right figure. 
+                        Check the box to apply the adjustment method to line width in the right figures.
+                        Slide to adjust the constant line width factor in both the left and right figure.
                     </div>
                 </label>
                 <div id="show-linewidth" class="number">1</div>
@@ -40,8 +43,8 @@
                 <label for="slider-opacity" class="tooltip">
                     Opacity
                     <div class="tooltiptext">
-                        Check the box to apply the adjustment method to opacity in the right figures. 
-                        Slide to adjust the constant opacity factor in both the left and right figure. 
+                        Check the box to apply the adjustment method to opacity in the right figures.
+                        Slide to adjust the constant opacity factor in both the left and right figure.
                     </div>
                 </label>
                 <div id="show-opacity" class="number">1</div>
@@ -51,7 +54,9 @@
                 <label for="slider-c" class="tooltip">
                     Adjusted h
                     <div class="tooltiptext">
-                        <i >h</i> is a line height adjustment factor applying with equal force to all lines to the (adjusted) figures displayed at the right side. It can be used to manually accomodate average line heights in the right figure. 
+                        <i>h</i> is a line height adjustment factor applying with equal force to all lines to the
+                        (adjusted) figures displayed at the right side. It can be used to manually accomodate average
+                        line heights in the right figure.
                     </div>
                 </label>
                 <div id="show-c" class="number">1</div>
@@ -76,35 +81,198 @@
                     Colour
                 </label>
                 <select id="select-colour" onchange="update('colour')">
-                    <option value="multi">          multi-colour</option>
+                    <option value="multi"> multi-colour</option>
                     <option value="black" selected> black</option>
-                    <option value="#466db4">        blue </option>
-                    <option value="red">            red  </option>
-                    <option value="green">          green</option>
+                    <option value="#466db4"> blue </option>
+                    <option value="red"> red </option>
+                    <option value="green"> green</option>
                 </select>
             </section>
             <section class="slidewrapper">
                 <label for="select-rendering" class="tooltip">
-                    Rendering 
+                    Rendering
                     <div class="tooltiptext">
-                        Select "polygon" to render parallelograms with fixed height instead of lines in the right figure (not recommended). Parameter <i>P</i> and the "line width" checkbox will be ignored. 
+                        Select "polygon" to render parallelograms with fixed height instead of lines in the right figure
+                        (not recommended). Parameter <i>P</i> and the "line width" checkbox will be ignored.
                     </div>
                 </label>
                 <select id="select-rendering" onchange="update('rendering')">
-                    <option value="line" selected>lines  </option>
-                    <option value="polygon">      polygon</option>
+                    <option value="line" selected>lines </option>
+                    <option value="polygon"> polygon</option>
                 </select>
             </section>
         </section>
     </header>
     <main id="main"></main>
+    <footer>
+        <a data-fancybox data-src="#data-protection" href="javascript:;">Data Protection</a>
+        <a data-fancybox data-type="iframe" data-src="https://www.vis.uni-konstanz.de/impressum/" href="javascript:;">Imprint</a>
+        <div id="data-protection">
+
+            <h3>Datenschutzinformationen</h3>
+            <b>Stand: 24.07.2019</b>
+            <br>
+            <br>
+
+            <p class="text-justify">
+                <h4>I. Name und Anschrift des Datenschutzbeauftragten</h4>
+                Der Datenschutzbeauftragte des Verantwortlichen ist erreichbar unter: <br>
+                E-Mail: <a href="mailto:dsgvo@dbvis.inf.uni-konstanz.de">dsgvo@dbvis.inf.uni-konstanz.de</a>.
+                <br>
+                <br>
+            </p>
+
+            <p class="text-justify">
+                <h4>II. Name und Anschrift des Verantwortlichen</h4>
+                Der Verantwortliche im Sinne der Datenschutz-Grundverordnung und anderer nationaler Datenschutzgesetze
+                der Mitgliedstaaten sowie sonstiger datenschutzrechtlicher Bestimmungen ist die:
+                <br>
+                <br>
+                <a href="http://vis.uni.kn">AG Keim</a><br>
+                <a href="http://uni.kn">Universität Konstanz</a><br>
+                vertreten durch den Lehrstuhlinhaber, Prof. Dr. Daniel A. Keim<br>
+                Universitätsstraße 10<br>
+                78464 Konstanz<br>
+                Tel. +49 7531 88-3161<br>
+                E-Mail: <a href="mailto:keim@uni-konstanz.de">keim@uni-konstanz.de</a><br>
+                <br>
+
+                <h5>Inhaltliche Verantwortung</h5>
+                Michael Blumenschein<br>
+                Tel. +49 7531 88-3943<br>
+                E-Mail: <a
+                    href="mailto:blumenschein@dbvis.inf.uni-konstanz.de">blumenschein@dbvis.inf.uni-konstanz.de</a>
+                <br>
+                <br>
+            </p>
+
+
+            <p class="text-justify">
+                <h4>III. Bereitstellung der Webseite und Erstellung von Logfiles</h4>
+
+                <h5>1. Beschreibung und Umfang der Datenverarbeitung</h5>
+                Bei jedem Zugriff eines Nutzers oder einer Nutzerin auf eine Seite aus dem Angebot der Website
+                und bei jedem Abruf einer Datei oder sonstigen Ressource werden folgende Daten über diesen Vorgang in
+                einer Protokolldatei gespeichert:
+                <ul>
+                    <li>Datum und Uhrzeit der Anfrage</li>
+                    <li>Adresse und Datenmenge ( in Bytes ) der angefragten und/oder abgerufenen Ressource</li>
+                    <li>IP-Adresse der Besucherin/ des Besuchers</li>
+                    <li>Anfragemethode (z.B. GET-Methode zur Anforderung einer Webseite vom Server)</li>
+                    <li>Antwort des Servers (HTTP Statuscode, z. B. „Datei übertragen.“ oder „Datei nicht gefunden“ etc.
+                    </li>
+                    <li>Website, von der aus der Zugriff erfolgte (zuvor besuchte Website, so genannter „Referrer“) und
+                        verwendeter Suchmaschinen-Suchbegriff, sofern übermittelt</li>
+                    <li>Erkennungsdaten des verwendeten Browser- und Betriebssystems ( + Version ), sofern übermittelt
+                    </li>
+                    <li>Geotargeting ( Zuordnung von IP-Adresse zu deren geografischer Herkunft )</li>
+                </ul>
+
+                <h5>2. Rechtsgrundlage</h5>
+                Rechtsgrundlage für die Speicherung der Logfiles ist Art. 6 Abs. 1 lit. e) i.V.m. Abs. 3 DSGVO i.V.m. §4
+                Landesdatenschutzgesetz BW (im Folgenden: LDSG) in der ab dem 6. Juni 2018 geltenden Fassung.
+
+
+                <h5>3. Zweck der Datenverarbeitung</h5>
+                Die protokollierten Daten werden verwendet, um Störungen oder Fehler an den Systemen, die für das
+                Web-Angebot der Universität Konstanz erforderlich sind, zu erkennen, einzugrenzen oder zu beseitigen.
+                Davon umfasst sind auch Störungen, die zu einer Einschränkung der Verfügbarkeit der
+                Informations- und Kommunikationsdienste oder zu einem unerlaubten Zugriff auf die Systeme führen können.
+
+
+                <h5>4. Dauer der Speicherung</h5>
+                Die letzten 2 Bytes der IP-Adresse werde nach maximal 5 Tagen gelöscht, so dass eine Zuordnung der
+                weiteren erhobenen
+                Daten zu einer Person dann nicht mehr möglich ist.
+                <br>
+                Die anonymisierten Daten werden für statistische Zwecke verwendet, um die Gestaltung der Website
+                kontinuierlich zu optimieren.
+                <br>
+                <br>
+            </p>
+
+
+            <p class="text-justify">
+                <h4>IV. Verwendung von Cookies</h4>
+                Die Website erhebt und speichert keine Cookies.
+                <br>
+                <br>
+            </p>
+
+            <p class="text-justify">
+                <h4>V. Formulare</h4>
+                Die Website erhebt und speichert keine personenbezogene
+                Daten in Formularen.
+                Daten (csv Dateien etc.), die auf die Website hochgeladen werden, um diese mit Hilfe der v-plots zu
+                visualisieren, werden
+                ausschließlich im Browser gespeichert und nach Verlassen der Website automatisch gelöscht. Die
+                Verantwortlichen der
+                Website haben keine Möglichkeit auf diese Daten zuzugreifen.
+                <br>
+                <br>
+            </p>
+
+            <p class="text-justify">
+                <h4>VI. Webanalyse</h4>
+                Die Website verwendet keine Webanalysetools wie z.b.
+                Google Analytics.
+                <br>
+                <br>
+            </p>
+
+
+            <p class="text-justify">
+                <h4>VII. Rechte der betroffenen Personen</h4>
+                <ol>
+                    <li>Sie haben das Recht, von der <a href="http://vis.uni.kn">AG Keim</a> Auskunft über die zu Ihrer
+                        Person gespeicherten personenbezogenen Daten gemäß Art. 15 DSGVO zu erhalten und/oder unrichtig
+                        gespeicherte personenbezogene Daten gemäß Art. 16 DSGVO berichtigen zu lassen.</li>
+                    <li>Sie haben darüber hinaus das Recht auf Löschung (Art. 17 DSGVO) oder auf Einschränkung der
+                        Verarbeitung (Art. 18 DSGVO) oder ein Widerspruchsrecht gegen die Verarbeitung (Art. 21 DSGVO).
+                    </li>
+                    <li>Erfolgt der Widerspruch im Rahmen eines Vertragsverhältnisses kann dies zur Folge haben, dass
+                        eine Vertragsdurchführung nicht mehr möglich ist.</li>
+                    <li>Beruht die Verarbeitung der personenbezogenen Daten auf einer Einwilligung kann diese jederzeit
+                        widerrufen werden. Die Rechtmäßigkeit der Verarbeitung bleibt bis zum Widerruf unberührt.</li>
+                    <li>Bitte wenden Sie sich zur Wahrnehmung Ihrer Rechte an den Datenschutzbeauftragten, E-Mail <a
+                            href="mailto:dsgvo@dbvis.inf.uni-konstanz.de">dsgvo@dbvis.inf.uni-konstanz.de</a>.</li>
+                    <li>ie haben außerdem das Recht auf Beschwerde bei der Aufsichtsbehörde, wenn Sie der Ansicht sind,
+                        dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die
+                        datenschutzrechtlichen Vorschriften verstößt (Art. 77 DSGVO). Die zuständige Aufsichtsbehörde
+                        ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg (<a
+                            href="https://www.baden-wuerttemberg.datenschutz.de">https://www.baden-wuerttemberg.datenschutz.de</a>)
+                    </li>
+                </ol>
+                <br>
+                <br>
+            </p>
+
+            <p class="text-justify">
+                <h4>VIII. Soziale Netzwerke</h4>
+                Auf der Website sind keine sozialen Netwerke eingebunden.
+                <br>
+                <br>
+            </p>
+        </div>
+    </footer>
 </body>
 <!-- libraries-->
 <script src="lib/d3.v3.min.js"></script>
 <script src="lib/jquery-3.4.0.min.js"></script>
 <script src="lib/jquery-ui.min.js"></script>
+<script src="lib/jquery.fancybox.min.js"></script>
+<script>
+    $('[data-fancybox]').fancybox({
+        toolbar: false,
+        smallBtn: true,
+        iframe: {
+            preload: false
+        }
+    })
+</script>
 <!-- scripts -->
 <script src="visualization.js"></script>
 <script src="data/own/list.js"></script>
 <script src="main.js"></script>
+
 </html>

@@ -4,7 +4,14 @@
     padding: 0px;
 }
 
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
     user-select: none;
     font-family: Lora;
 }
@@ -67,7 +74,7 @@ header .slidewrapper, header section.checkboxgroup {
     width: 150px;
     margin-left: 20px;
     margin-top: 0px;
-    float:right;
+    float: right;
 }
 
 select {
@@ -103,12 +110,13 @@ select {
     content: " ";
     position: absolute;
     top: 50%;
-    right: 100%; /* To the left of the tooltip */
+    right: 100%;
+    /* To the left of the tooltip */
     margin-top: -5px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent black transparent transparent;
-  }
+}
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
@@ -134,4 +142,24 @@ svg, svg * {
     shape-rendering: geometricPrecision;
     display: block;
     margin: 0px;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+#data-protection {
+    display: none;
+}
+
+footer {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30px;
+}
+
+footer a {
+    margin: 20px;
+    text-decoration: none;
 }
