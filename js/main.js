@@ -103,15 +103,16 @@ function main() {
         0: "Random Noise",
         4: "Linear Noise", //+- 0.2
         8: "Gaussian Noise",
-        12: "Synthetic Data",
-        16: "Variance",
-        20: "Correlations",
-        24: "Realworld Data",
-        28: "Own Datasets"
+        12: "Synthetic Data 1",
+        16: "Synthetic Data 2",
+        20: "Variance",
+        24: "Correlations",
+        28: "Realworld Data",
+        32: "Own Datasets"
     }
 
     // add all file names and short descriptions
-    for (dataset of ["uniform", "linear", "gaussian", "synthetic", "maxvar", "correlated"]) {
+    for (dataset of ["uniform", "linear", "gaussian", "synthetic-1", "synthetic-2", "maxvar", "correlated"]) {
         for (i of [100, 200, 400, 800]) {
             files.push(["data/" + dataset + "/" + i + ".csv", "N" + i])
         }
