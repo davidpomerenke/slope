@@ -2,6 +2,7 @@ var ownFiles = {}
 
 function upload(e) {
     document.getElementById("header").style.height = "280px"
+    document.getElementById("main").style.paddingTop = "300px"
     var readfiles = e.target.files
     var i = 0
     for (file of readfiles) {
