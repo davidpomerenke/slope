@@ -51,3 +51,7 @@ In this case, parameter P has no effect any longer.
 Own datasets can be uploaded in the tool. 
 Files must be in _csv_-format with an optional header and numeric columns. 
 An optional column _cluster_ in the _csv_-file may be used for the multi-colour display option.
+
+## Data Generation
+The data files have been created with _data-generation.r_. 
+The real-world datasets are from R ’s [cluster.datasets](https://cran.r-project.org/package=cluster.datasets) package.
