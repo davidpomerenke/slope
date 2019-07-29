@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,12 @@
         Line Adjustment
     </title>
     <link rel="stylesheet" href="lib/jquery-ui.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lib/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
+
 <body onload="main()">
-    <header>
+    <header id="header">
         <section id="boxes">
         </section>
         <section id="sliders">
@@ -28,8 +31,8 @@
                 <label for="slider-thickness" class="tooltip">
                     Line Width
                     <div class="tooltiptext">
-                        Check the box to apply the adjustment method to line width in the right figures. 
-                        Slide to adjust the constant line width factor in both the left and right figure. 
+                        Check the box to apply the adjustment method to line width in the right figures.
+                        Slide to adjust the constant line width factor in both the left and right figure.
                     </div>
                 </label>
                 <div id="show-linewidth" class="number">1</div>
@@ -40,8 +43,8 @@
                 <label for="slider-opacity" class="tooltip">
                     Opacity
                     <div class="tooltiptext">
-                        Check the box to apply the adjustment method to opacity in the right figures. 
-                        Slide to adjust the constant opacity factor in both the left and right figure. 
+                        Check the box to apply the adjustment method to opacity in the right figures.
+                        Slide to adjust the constant opacity factor in both the left and right figure.
                     </div>
                 </label>
                 <div id="show-opacity" class="number">1</div>
@@ -51,7 +54,9 @@
                 <label for="slider-c" class="tooltip">
                     Adjusted h
                     <div class="tooltiptext">
-                        <i >h</i> is a line height adjustment factor applying with equal force to all lines to the (adjusted) figures displayed at the right side. It can be used to manually accomodate average line heights in the right figure. 
+                        <i>h</i> is a line height adjustment factor applying with equal force to all lines to the
+                        (adjusted) figures displayed at the right side. It can be used to manually accomodate average
+                        line heights in the right figure.
                     </div>
                 </label>
                 <div id="show-c" class="number">1</div>
@@ -76,24 +81,31 @@
                     Colour
                 </label>
                 <select id="select-colour" onchange="update('colour')">
-                    <option value="multi">          multi-colour</option>
+                    <option value="multi"> multi-colour</option>
                     <option value="black" selected> black</option>
-                    <option value="#466db4">        blue </option>
-                    <option value="red">            red  </option>
-                    <option value="green">          green</option>
+                    <option value="#466db4"> blue </option>
+                    <option value="red"> red </option>
+                    <option value="green"> green</option>
                 </select>
             </section>
             <section class="slidewrapper">
                 <label for="select-rendering" class="tooltip">
-                    Rendering 
+                    Rendering
                     <div class="tooltiptext">
-                        Select "polygon" to render parallelograms with fixed height instead of lines in the right figure (not recommended). Parameter <i>P</i> and the "line width" checkbox will be ignored. 
+                        Select "polygon" to render parallelograms with fixed height instead of lines in the right figure
+                        (not recommended). Parameter <i>P</i> and the "line width" checkbox will be ignored.
                     </div>
                 </label>
                 <select id="select-rendering" onchange="update('rendering')">
-                    <option value="line" selected>lines  </option>
-                    <option value="polygon">      polygon</option>
+                    <option value="line" selected>lines </option>
+                    <option value="polygon"> polygon</option>
                 </select>
+            </section>
+            <section class="slidewrapper">
+                <label for="select-rendering">
+                    Upload
+                </label>
+                <input type="file" id="file-input" accept=".csv" multiple>
             </section>
         </section>
     </header>
@@ -103,8 +115,17 @@
 <script src="lib/d3.v3.min.js"></script>
 <script src="lib/jquery-3.4.0.min.js"></script>
 <script src="lib/jquery-ui.min.js"></script>
+<script src="lib/jquery.fancybox.min.js"></script>
+<script>
+    $('[data-fancybox]').fancybox({
+        iframe: {
+            preload: false
+        }
+    })
+</script>
 <!-- scripts -->
-<script src="visualization.js"></script>
-<script src="data/own/list.js"></script>
-<script src="main.js"></script>
+<script src="js/initialize.js"></script>
+<script src="js/visualization.js"></script>
+<script src="js/upload.js"></script>
+<script src="js/main.js"></script>
 </html>
