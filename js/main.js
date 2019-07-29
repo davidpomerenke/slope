@@ -108,32 +108,30 @@ function main() {
         20: "Variance",
         24: "Correlations",
         28: "Realworld Data",
-        32: "Own Datasets"
+        32: "", 
+        36: "Own Datasets"
     }
 
     // add all file names and short descriptions
-    for (dataset of ["uniform", "linear", "gaussian", "synthetic-1", "synthetic-2", "maxvar", "correlated"]) {
+    for (dataset of ["uniform", "linear", "linear", "synthetic-1", "synthetic-2", "variance", "correlations"]) {
         for (i of [100, 200, 400, 800]) {
-            files.push(["data/" + dataset + "/" + i + ".csv", "N" + i])
+            files.push(["data/" + dataset + "-" + i + ".csv", "N" + i])
         }
     }
     for (file of [
-        //"RW03-ecoli-normalized.csv", 
-        //"RW06-iris-normalized.csv", 
-        ["RW09-seeds-normalized.csv", "Seeds"],
-        ["RW01-airquality-normalized.csv", "Air Quality"],
-        ["RW04-forestfires-normalized.csv", "Forest Fires"],
-        ["RW07-wine-normalized.csv", "Wine"],
-        //"RW10-stoneFlakes-normalized.csv", 
-        //"RW02-breasttissue-normalized.csv", 
-        //"RW05-glass-normalized.csv", 
-        //"RW08-mtCars-normalized.csv"
+        ["realworld-acidosis-patients.csv", "Acidosis"],
+        ["realworld-all-mammals-milk-1956.csv", "Milk 1"],
+        ["realworld-life-expectancy-1971.csv", "Life Exp."],
+        ["realworld-mutation-distances-1967.csv", "Mutations"],
+        ["realworld-rda-meat-fish-fowl-1959.csv", "Fowl"],
+        ["realworld-sample-mammals-milk-1956.csv", "Milk 2"],
+        ["realworld-us-south-demographics-1965.csv", "Demograph."],
+        ["realworld-mammal-dentition.csv", "Dentition"],
     ]) {
-        files.push(["data/realworld/" + file[0], file[1]])
+        files.push(["data/" + file[0], file[1]])
     }
-
     for (ownfile of ownFiles) {
-        files.push(["data/own/" + ownfile[0], ownfile[1]])
+        files.push(["data/" + ownfile[0], ownfile[1]])
     }
 
     var i = 0

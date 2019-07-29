@@ -87,7 +87,7 @@ function pcVis(file, pcTarget, method) {
 
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(data[0]).filter(function (d) {
-            return d !== "ObjectID" && d !== "id" && d !== "ObjectId" && d != "Cluster" && d !== "cluster" && (y[d] = d3.scale.linear()
+            return d !== "ObjectID" && d !== "id" && d !== "ObjectId" && d != "Cluster" && d !== "cluster" && d !== "class" && (y[d] = d3.scale.linear()
                 .domain([0, 1])
                 .range([h, 0]))
         }))
@@ -144,7 +144,7 @@ function pcVis(file, pcTarget, method) {
 
         function createColourFunction(k) {
             return function(d) {
-                return colormap[d[Object.keys(d)[0]]]
+                return colormap[d[Object.keys(d)[1]]]
             }
         }
         

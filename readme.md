@@ -9,7 +9,7 @@ IEEE Conference on Information Visualization 2019, shortpaper track.
 
 ## Testing tool
 
-![Screenshot of the testing tool](screenshot.png)
+![Screenshot of the testing tool](assets/screenshot.png)
 
 For the purpose of testing the effect of our adjustment technique, we have implemented a testing tool. 
 The tool offers many synthetic and real world data sets for display, as well as the possibility to add own datasets. It allows to continuously manipulate parameter P and compare the effect to standard PCP renderings. 
