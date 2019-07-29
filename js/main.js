@@ -27,7 +27,7 @@ function update(parameter, value) {
     copy.forEach(e => { toggleVis(e); toggleVis(e) })
 }
 
-function toggleVis(file) {
+function toggleVis(file, uploaded = false) {
 
     if (activeFiles.has(file)) {
         activeFiles.delete(file)
@@ -40,7 +40,7 @@ function toggleVis(file) {
     ["a", "b"].forEach(s => {
 
         if ($("#pcTarget" + i + s).html() === "") {
-            pcVis(file, "#pcTarget" + i + s, (s === "a" ? "original" : "adjusted"), 0.5)
+            pcVis(file, "#pcTarget" + i + s, (s === "a" ? "original" : "adjusted"), uploaded)
         }
         else {
             $("#pcTarget" + i + s).html("")
@@ -98,20 +98,6 @@ function main() {
         }
     })
 
-    // define headings for datasets
-    var headings = {
-        0: "Random Noise",
-        4: "Linear Noise", //+- 0.2
-        8: "Gaussian Noise",
-        12: "Synthetic Data 1",
-        16: "Synthetic Data 2",
-        20: "Variance",
-        24: "Correlations",
-        28: "Realworld Data",
-        32: "", 
-        36: "Own Datasets"
-    }
-
     // add all file names and short descriptions
     for (dataset of ["uniform", "linear", "linear", "synthetic-1", "synthetic-2", "variance", "correlations"]) {
         for (i of [100, 200, 400, 800]) {
@@ -130,48 +116,23 @@ function main() {
     ]) {
         files.push(["data/" + file[0], file[1]])
     }
-    for (ownfile of ownFiles) {
-        files.push(["data/" + ownfile[0], ownfile[1]])
-    }
 
     var i = 0
 
     // create headers for checkboxes and target areas for plots
-    for (file of files) {
+    initialize(files, i)
+}
 
-        if (Object.keys(headings).includes(i + "")) {
-            var checkboxgroup = $("<section>")
-                .attr("class", "checkboxgroup")
-                .appendTo("#boxes")
-            $("<b>")
-                .text(headings[i])
-                .appendTo(checkboxgroup)
-        }
-
-        // create checkboxes
-        var section = $("<section>")
-            .appendTo(checkboxgroup)
-        $("<input>")
-            .attr("type", "checkbox")
-            .attr("id", file[0])
-            .attr("onChange", "toggleVis('" + file[0] + "')")
-            .appendTo(section)
-        $("<label>")
-            .attr("for", file[0])
-            .text(file[1])
-            .appendTo(section)
-
-        // create targets for ordered figures
-        var comparebox = $("<div>")
-            .attr("class", "row")
-            .appendTo("main")
-        $("<div>")
-            .attr("id", "pcTarget" + i + "a")
-            .appendTo(comparebox)
-        $("<div>")
-            .attr("id", "pcTarget" + i + "b")
-            .appendTo(comparebox)
-
-        i++
-    }
+// define headings for datasets
+var headings = {
+    0: "Random Noise",
+    4: "Linear Noise", //+- 0.2
+    8: "Gaussian Noise",
+    12: "Synthetic Data 1",
+    16: "Synthetic Data 2",
+    20: "Variance",
+    24: "Correlations",
+    28: "Realworld Data",
+    32: "",
+    36: "Own Datasets"
 }

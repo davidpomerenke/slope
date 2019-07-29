@@ -70,11 +70,15 @@ header .slidewrapper, header section.checkboxgroup {
     padding-left: 15px;
 }
 
-.ui-slider, select {
+#sliders .ui-slider, #sliders select, #sliders input#file-input {
     width: 150px;
     margin-left: 20px;
     margin-top: 0px;
     float: right;
+}
+
+#sliders input#file-input {
+    width: 180px;
 }
 
 select {

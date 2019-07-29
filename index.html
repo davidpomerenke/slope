@@ -13,7 +13,7 @@
 </head>
 
 <body onload="main()">
-    <header>
+    <header id="header">
         <section id="boxes">
         </section>
         <section id="sliders">
@@ -101,9 +101,20 @@
                     <option value="polygon"> polygon</option>
                 </select>
             </section>
+            <section class="slidewrapper">
+                <label for="select-rendering" class="tooltip">
+                    Upload
+                    <div class="tooltiptext">
+                        Upload own datasets. 
+                    </div>
+                </label>
+                <input type="file" id="file-input" accept=".csv" multiple>
+            </section>
         </section>
     </header>
-    <main id="main"></main>
+    <main id="main">
+        <div id="disp"></div>
+    </main>
     <footer>
         <a href="https://github.com/davidpomerenke/slope" target="_blank">Github</a>
         <a data-fancybox data-src="#data-protection" href="javascript:;">Data Protection</a>
@@ -270,9 +281,8 @@
     })
 </script>
 <!-- scripts -->
+<script src="js/initialize.js"></script>
 <script src="js/visualization.js"></script>
-<script src="js/list.js"></script>
-<script src="js/main.js"></script>
 <script src="js/upload.js"></script>
-
+<script src="js/main.js"></script>
 </html>
