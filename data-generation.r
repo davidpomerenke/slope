@@ -50,8 +50,9 @@ for (n in SIZES) {
     data <- cbind(data, c(runif(C, min = 0, max = 0.24), runif(C, min = 0.38, max = 0.62), runif(C, min = 0.76, max = 1)))
     data <- cbind(data, c(runif(C, min = 0.38, max = 0.62), runif(C, min = 0.76, max = 1), runif(C, min = 0, max = 0.24)))
     data <- cbind(data, c(runif(C, min = 0.38, max = 0.62), runif(C, min = 0, max = 0.24), runif(C, min = 0.76, max = 1)))
-    if (n > 0) {
-        data <- rbind(cbind(rep(1, n), runif(n, min = 0, max = 1), runif(n, min = 0, max = 1), runif(n, min = 0, max = 1), runif(n, min = 0, max = 1), runif(n, min = 0, max = 1)), data)
+    if (n > 100) {
+        m <- (n - 100)
+        data <- rbind(cbind(rep(1, m), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1)), data)
     }
     data <- data.frame(data)
     colnames(data) <- c("class", paste("dimension", 1:5))
@@ -70,10 +71,34 @@ for (n in SIZES) {
     data <- cbind(data, c(runif(C, min = 0.83, max = 1), runif(C, min = 0, max = 0.17), runif(C, min = 0.83, max = 1), runif(C, min = 0.20, max = 0.37))) #6
     data <- cbind(data, c(runif(C, min = 0, max = 0.17), runif(C, min = 0.82, max = 1), runif(C, min = 0.83, max = 1), runif(C, min = 0, max = 0.17))) #7
     data <- cbind(data, c(runif(C, min = 0.83, max = 1), runif(C, min = 0.83, max = 1), runif(C, min = 0.80, max = 0.97), runif(C, min = 0, max = 0.17))) #8
-    #data <- rbind(runif(n, min = 0, max = 1), data)
+    if (n > 100) {
+        m <- (n - 100)
+        data <- rbind(cbind(rep(1, m), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1)), data)
+    }
     data <- data.frame(data)
     colnames(data) <- c("class", paste("dimension", 1:8))
     write.table(data, file = paste("data/synthetic-1-", n, ".csv", sep=""), sep = ",", row.names = FALSE)
+}
+
+# ============ SYNTHETIC DATA 2
+C = 30 # number of datapoints per cluster
+for (n in SIZES) {
+    data <- c(rep(1, C), rep(2, C), rep(3, C), rep(4, C))
+    data <- cbind(data, sort(runif(n, min = 0, max = 1)))
+    data <- cbind(data, sort(runif(n, min = 0, max = 1)))
+    data <- cbind(data, sort(runif(n, min = 0, max = 1), decreasing = TRUE))
+    data <- cbind(data, c(runif(C, min = 0.28, max = 0.45), runif(C, min = 0, max = 0.17), runif(C, min = 0.83, max = 1), runif(C, min = 0.73, max = 0.9))) #4
+    data <- cbind(data, c(runif(C, min = 0, max = 0.17), runif(C, min = 0.04, max = 0.21), runif(C, min = 0.83, max = 1), runif(C, min = 0.59, max = 0.76))) #5
+    data <- cbind(data, c(runif(C, min = 0.83, max = 1), runif(C, min = 0, max = 0.17), runif(C, min = 0.83, max = 1), runif(C, min = 0.20, max = 0.37))) #6
+    data <- cbind(data, c(runif(C, min = 0, max = 0.17), runif(C, min = 0.82, max = 1), runif(C, min = 0.83, max = 1), runif(C, min = 0, max = 0.17))) #7
+    data <- cbind(data, c(runif(C, min = 0.83, max = 1), runif(C, min = 0.83, max = 1), runif(C, min = 0.80, max = 0.97), runif(C, min = 0, max = 0.17))) #8
+    if (n > 100) {
+        m <- n - 100
+        data <- rbind(cbind(rep(1, m), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1), runif(m, min = 0, max = 1)), data)
+    }
+    data <- data.frame(data)
+    colnames(data) <- c("class", paste("dimension", 1:8))
+    write.table(data, file = paste("data/synthetic-2-", n, ".csv", sep=""), sep = ",", row.names = FALSE)
 }
 
 # ============ CORRELATIONS
