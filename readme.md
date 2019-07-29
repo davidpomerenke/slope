@@ -48,6 +48,6 @@ In this case, parameter P has no effect any longer.
 
 ### Add own datasets
 
-Own datasets can be added as _csv_-files in the subdirectory _data/own/_.
-File names have to be added to the _list.js_ file inside this directory. 
+Own datasets can be uploaded in the tool. 
+Files must be in _csv_-format with an optional header and numeric columns. 
 An optional column _cluster_ in the _csv_-file may be used for the multi-colour display option.
