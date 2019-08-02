@@ -5,7 +5,7 @@ This is the supplementary material for:
 > David Pomerenke, Frederik L. Dennig, Daniel A.Keim, Johannes Fuchs, Michael Blumenschein.
 Slope-Dependent Rendering of Parallel Coordinates to Reduce Density Distortion and Ghost Clusters. 
 IEEE Conference on Information Visualization 2019. 
-[[ArXiv](https://arxiv.org/abs/1908.00500)
+[[ArXiv]](https://arxiv.org/abs/1908.00500)
 
 ## Online Prototype
 
