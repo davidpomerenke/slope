@@ -20,7 +20,6 @@ It is also possible to manipulate all other relevant parameters, namely the adju
 #### Online
 
 The tool is available at [davidpomerenke.github.io/slope](https://davidpomerenke.github.io/slope). 
-Note that adding own datasets is currently unsupported by the online version. 
 
 #### Local
 
