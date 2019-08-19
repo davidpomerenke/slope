@@ -20,6 +20,7 @@ It is also possible to manipulate all other relevant parameters, namely the adju
 #### Online
 
 The tool is available at [subspace.dbvis.de/pcp-adjustment](http://subspace.dbvis.de/pcp-adjustment). 
+
 It is also hosted via GitHub pages at [davidpomerenke.github.io/slope](https://davidpomerenke.github.io/slope). 
 
 #### Local
