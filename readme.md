@@ -4,8 +4,8 @@ This is the supplementary material for:
 
 > David Pomerenke, Frederik L. Dennig, Daniel A.Keim, Johannes Fuchs, Michael Blumenschein.
 Slope-Dependent Rendering of Parallel Coordinates to Reduce Density Distortion and Ghost Clusters. 
-IEEE Conference on Information Visualization 2019. 
-[[ArXiv]](https://arxiv.org/abs/1908.00500)
+Proceedings of the IEEE Visualization Conference (VIS) 2019. 
+[[ArXiv]](https://arxiv.org/abs/1908.00500) [[OSF]](https://osf.io/sy3dv/) 
 
 ## Online Prototype
 
@@ -19,7 +19,8 @@ It is also possible to manipulate all other relevant parameters, namely the adju
 
 #### Online
 
-The tool is available at [davidpomerenke.github.io/slope](https://davidpomerenke.github.io/slope). 
+The tool is available at [subspace.dbvis.de/pcp-adjustment](http://subspace.dbvis.de/pcp-adjustment). 
+It is also hosted via GitHub pages at [davidpomerenke.github.io/slope](https://davidpomerenke.github.io/slope). 
 
 #### Local
 
