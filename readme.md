@@ -7,7 +7,7 @@ This is the supplementary material for:
 > Proceedings of the IEEE Visualization Conference (VIS) 2019. 
 > [[arXiv]](https://arxiv.org/abs/1908.00500) [[OSF]](https://osf.io/sy3dv/) [[Vimeo]](https://vimeo.com/373792354)
 
-[![Video Preview](assets/animation.gif)](https://vimeo.com/373792354)
+<div style="text-align:center"><a href="https://vimeo.com/373792354"><img src="assets/animation.gif" alt="Video Preview" /></a></div>
 
 ## Online Prototype
 
